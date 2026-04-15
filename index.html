@@ -1,0 +1,2014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohamed Basith | Mechanical Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+/* ═══════════════════════════════════════════════
+   ROOT & RESET
+═══════════════════════════════════════════════ */
+:root{
+  --cream:#faf7f2;--cream2:#f4f0e8;--cream3:#ede8dc;
+  --ink:#1a1612;--ink2:#3d3530;--ink3:#6b6058;
+  --gold:#c9973a;--gold2:#e8b84b;--gold3:#f5d37a;
+  --teal:#2a7a6e;--teal2:#3a9d8e;--teal3:#d4f0eb;
+  --rose:#b84a5a;--rose2:#e06070;--rose3:#fde8eb;
+  --sky:#2855a0;--sky2:#3d70cf;--sky3:#dce8fc;
+  --white:#ffffff;--shadow:rgba(26,22,18,0.08);
+  --shadow2:rgba(26,22,18,0.18);
+  --ff-display:'Cormorant Garamond',serif;
+  --ff-body:'Outfit',sans-serif;
+  --ff-accent:'Space Grotesk',sans-serif;
+  --nav-h:72px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--cream);color:var(--ink);font-family:var(--ff-body);overflow-x:hidden;cursor:none}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+
+/* ═══ SCROLLBAR ═══════════════════════════════ */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--cream2)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+
+/* ═══ CUSTOM CURSOR ══════════════════════════ */
+#cur{width:10px;height:10px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99999;transition:transform .1s}
+#cur2{width:38px;height:38px;border:1.5px solid var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99998;transition:all .14s ease;opacity:.6}
+#cur.big{transform:scale(3.5)}
+
+/* ═══ PAGE LOADER ════════════════════════════ */
+#loader{position:fixed;inset:0;background:var(--ink);z-index:99990;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.2rem}
+.loader-logo{font-family:var(--ff-display);font-size:3rem;font-weight:600;color:var(--gold);letter-spacing:-1px;animation:ldpulse 1.2s ease-in-out infinite}
+.loader-bar{width:200px;height:2px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden}
+.loader-bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:2px;animation:ldbar 1.6s ease forwards}
+@keyframes ldpulse{0%,100%{opacity:.7}50%{opacity:1}}
+@keyframes ldbar{to{width:100%}}
+
+/* ═══ NAV ════════════════════════════════════ */
+nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:1000;display:flex;align-items:center;padding:0 5%;transition:all .4s}
+nav.solid{background:rgba(250,247,242,.95);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--cream3)}
+.nav-logo{font-family:var(--ff-display);font-size:1.6rem;font-weight:700;color:var(--ink);letter-spacing:-0.5px}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:2.2rem;list-style:none;margin-left:auto}
+.nav-links a{font-size:.87rem;font-weight:500;letter-spacing:.5px;color:var(--ink2);transition:color .3s;font-family:var(--ff-accent);text-transform:uppercase;font-size:.78rem}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{display:flex;gap:.8rem;align-items:center;margin-left:2rem}
+.nav-admin-btn{background:transparent;border:1px solid var(--cream3);color:var(--ink3);padding:.45rem 1rem;border-radius:50px;font-size:.8rem;cursor:pointer;transition:all .3s;font-family:var(--ff-body);display:flex;align-items:center;gap:.4rem}
+.nav-admin-btn:hover{border-color:var(--gold);color:var(--gold)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;margin-left:1.5rem}
+.hamburger span{width:22px;height:2px;background:var(--ink2);border-radius:2px;transition:.3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(250,247,242,.98);backdrop-filter:blur(24px);border-bottom:1px solid var(--cream3);flex-direction:column;padding:1.5rem 5%;gap:0;z-index:999}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:var(--ff-accent);font-size:.9rem;text-transform:uppercase;letter-spacing:.5px;color:var(--ink2);padding:.9rem 0;border-bottom:1px solid var(--cream3);transition:color .3s}
+.mobile-menu a:hover{color:var(--gold)}
+
+/* ═══ HERO ═══════════════════════════════════ */
+#hero{min-height:100vh;display:flex;align-items:center;padding:calc(var(--nav-h) + 3rem) 5% 5rem;position:relative;overflow:hidden;background:var(--cream)}
+.hero-grain{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");opacity:.6;pointer-events:none}
+.hero-line{position:absolute;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--cream3) 30%,var(--cream3) 70%,transparent);pointer-events:none}
+.hero-line-1{left:25%}
+.hero-line-2{left:50%}
+.hero-line-3{left:75%}
+.hero-inner{display:flex;align-items:center;justify-content:space-between;gap:4rem;width:100%;max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.hero-content{flex:1}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--ff-accent);font-size:.78rem;text-transform:uppercase;letter-spacing:3px;color:var(--gold);margin-bottom:1.5rem;opacity:0;animation:fadeUp .6s .2s ease forwards}
+.hero-eyebrow-line{width:40px;height:1px;background:var(--gold)}
+.hero-name{font-family:var(--ff-display);font-size:clamp(3rem,7vw,6.5rem);font-weight:700;line-height:1.0;letter-spacing:-2px;color:var(--ink);opacity:0;animation:fadeUp .7s .35s ease forwards}
+.hero-name em{font-style:italic;color:var(--gold);display:block}
+.hero-role{font-family:var(--ff-accent);font-size:clamp(.95rem,2vw,1.1rem);font-weight:400;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);margin:1.2rem 0 1.5rem;opacity:0;animation:fadeUp .7s .5s ease forwards}
+.hero-desc{font-size:1rem;line-height:1.85;color:var(--ink2);max-width:500px;margin-bottom:2.5rem;opacity:0;animation:fadeUp .7s .65s ease forwards}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp .7s .8s ease forwards}
+.btn-gold{background:var(--gold);color:var(--white);border:none;padding:.9rem 2rem;border-radius:4px;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .3s;font-family:var(--ff-body);text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;letter-spacing:.3px}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,151,58,.3)}
+.btn-outline{background:transparent;border:1.5px solid var(--ink2);color:var(--ink2);padding:.88rem 2rem;border-radius:4px;font-size:.9rem;font-weight:500;cursor:pointer;transition:all .3s;font-family:var(--ff-body);text-decoration:none;display:inline-flex;align-items:center;gap:.5rem}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+.hero-stats{display:flex;gap:3rem;margin-top:3.5rem;opacity:0;animation:fadeUp .7s 1s ease forwards}
+.stat-num{font-family:var(--ff-display);font-size:2.8rem;font-weight:700;color:var(--ink);line-height:1;letter-spacing:-1px}
+.stat-num em{color:var(--gold);font-style:normal}
+.stat-label{font-size:.78rem;text-transform:uppercase;letter-spacing:2px;color:var(--ink3);margin-top:.3rem;font-family:var(--ff-accent)}
+.hero-visual{flex:0 0 380px;position:relative;opacity:0;animation:fadeIn .9s .5s ease forwards}
+.hero-img-wrap{position:relative;width:340px;margin:0 auto}
+.hero-img-bg{width:280px;height:340px;background:var(--cream2);border:1px solid var(--cream3);border-radius:4px;position:relative;overflow:hidden;margin:0 auto}
+.hero-img-bg img,.hero-initials-display{width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;font-family:var(--ff-display);font-size:5rem;font-weight:700;color:var(--gold)}
+.hero-frame{position:absolute;top:20px;left:20px;right:-20px;bottom:-20px;border:1.5px solid var(--gold);border-radius:4px;z-index:-1;opacity:.5}
+.hero-tag{position:absolute;background:var(--white);border:1px solid var(--cream3);border-radius:8px;padding:.7rem 1.1rem;font-size:.8rem;box-shadow:0 4px 16px var(--shadow);white-space:nowrap;display:flex;align-items:center;gap:.6rem}
+.hero-tag-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.ht1{bottom:-10px;left:-30px;animation:htFloat 3.5s ease-in-out infinite}
+.ht2{top:20px;right:-20px;animation:htFloat 4.5s 1s ease-in-out infinite}
+@keyframes htFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* ═══ SECTION COMMON ════════════════════════ */
+section{padding:7rem 5%;position:relative}
+.section-inner{max-width:1200px;margin:0 auto}
+.section-label{display:inline-flex;align-items:center;gap:.8rem;font-family:var(--ff-accent);font-size:.75rem;text-transform:uppercase;letter-spacing:3px;color:var(--gold);margin-bottom:1rem}
+.section-label::before{content:'';width:32px;height:1px;background:var(--gold)}
+.section-title{font-family:var(--ff-display);font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:600;color:var(--ink);letter-spacing:-1px;line-height:1.1;margin-bottom:.8rem}
+.section-title em{font-style:italic;color:var(--gold)}
+.section-sub{font-size:.98rem;color:var(--ink3);line-height:1.8;max-width:560px}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .75s ease,transform .75s ease}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+
+/* ═══ ABOUT ══════════════════════════════════ */
+#about{background:var(--white)}
+.about-grid{display:flex;gap:5rem;align-items:flex-start;margin-top:4rem;flex-wrap:wrap}
+.about-text{flex:1;min-width:280px}
+.about-text p{color:var(--ink2);line-height:1.9;margin-bottom:1.3rem;font-size:.98rem}
+.about-aside{flex:0 0 310px}
+.about-card{background:var(--cream);border:1px solid var(--cream3);border-radius:8px;padding:2rem;position:relative;overflow:hidden}
+.about-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom,var(--gold),var(--teal2))}
+.detail-item{display:flex;gap:1rem;padding:.8rem 0;border-bottom:1px solid var(--cream3)}
+.detail-item:last-child{border-bottom:none}
+.di-icon{color:var(--gold);width:18px;flex-shrink:0;margin-top:3px;font-size:.9rem}
+.di-key{font-size:.72rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--ink3);margin-bottom:3px;font-family:var(--ff-accent)}
+.di-val{font-size:.9rem;color:var(--ink);font-weight:500}
+.lang-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.3rem}
+.lang-chip{background:var(--teal3);color:var(--teal);padding:.2rem .7rem;border-radius:50px;font-size:.74rem;font-weight:600;font-family:var(--ff-accent)}
+
+/* ═══ EDUCATION ══════════════════════════════ */
+#education{background:var(--cream)}
+.edu-list{display:flex;flex-direction:column;gap:1.2rem;margin-top:3.5rem}
+.edu-card{background:var(--white);border:1px solid var(--cream3);border-radius:8px;padding:2rem 2.2rem;display:flex;gap:2rem;align-items:flex-start;transition:all .35s;position:relative;overflow:hidden}
+.edu-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(to right,var(--gold3),transparent);transition:width .35s;z-index:0}
+.edu-card:hover{transform:translateX(6px);box-shadow:0 4px 24px var(--shadow)}
+.edu-card:hover::after{width:60px}
+.edu-card>*{position:relative;z-index:1}
+.edu-icon-wrap{width:52px;height:52px;border-radius:10px;background:var(--cream2);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+.edu-info{flex:1}
+.edu-info h3{font-family:var(--ff-display);font-size:1.2rem;font-weight:600;color:var(--ink);margin-bottom:.3rem}
+.edu-info p{color:var(--ink3);font-size:.88rem;margin-bottom:.7rem}
+.edu-badge{display:inline-block;background:var(--teal3);color:var(--teal);padding:.25rem .8rem;border-radius:50px;font-size:.76rem;font-weight:600;font-family:var(--ff-accent)}
+.edu-year{font-family:var(--ff-accent);font-size:.8rem;color:var(--gold);font-weight:600;white-space:nowrap;margin-left:auto;padding-top:.3rem}
+
+/* ═══ EXPERIENCE ═════════════════════════════ */
+#experience{background:var(--ink)}
+.exp-section-title{color:var(--cream)!important}
+.exp-section-sub{color:var(--ink3)!important}
+.exp-section-label{color:var(--gold2)!important}
+.exp-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:2.5rem;margin-top:3rem;position:relative;overflow:hidden;transition:all .35s}
+.exp-card::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(201,151,58,.08),transparent 70%);pointer-events:none}
+.exp-card:hover{border-color:rgba(201,151,58,.2);box-shadow:0 8px 40px rgba(0,0,0,.3)}
+.exp-header{display:flex;gap:1.5rem;align-items:flex-start;flex-wrap:wrap;margin-bottom:1.5rem}
+.exp-logo{width:62px;height:62px;border-radius:12px;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0}
+.exp-meta{flex:1}
+.exp-meta h3{font-family:var(--ff-display);font-size:1.4rem;font-weight:600;color:var(--cream);margin-bottom:.3rem}
+.exp-meta .role{color:var(--gold);font-size:.9rem;font-family:var(--ff-accent);font-weight:500}
+.exp-duration-badge{background:rgba(201,151,58,.12);border:1px solid rgba(201,151,58,.2);color:var(--gold2);padding:.45rem 1.1rem;border-radius:50px;font-size:.8rem;font-family:var(--ff-accent);white-space:nowrap;align-self:flex-start}
+.exp-desc{color:rgba(255,255,255,.65);line-height:1.9;font-size:.95rem;margin-bottom:1.5rem}
+.exp-chips{display:flex;flex-wrap:wrap;gap:.6rem}
+.exp-chip{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.7);padding:.3rem .9rem;border-radius:50px;font-size:.8rem;font-family:var(--ff-accent);transition:all .3s;cursor:default}
+.exp-chip:hover{background:rgba(201,151,58,.15);border-color:rgba(201,151,58,.3);color:var(--gold2)}
+
+/* ═══ PROJECTS ═══════════════════════════════ */
+#projects{background:var(--white)}
+.projects-grid{display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:3.5rem}
+.proj-card{flex:1 1 320px;background:var(--cream);border:1px solid var(--cream3);border-radius:8px;padding:2.2rem;position:relative;overflow:hidden;transition:all .38s;cursor:default}
+.proj-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--teal2));transform:scaleX(0);transform-origin:left;transition:transform .38s}
+.proj-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px var(--shadow2);background:var(--white)}
+.proj-card:hover::before{transform:scaleX(1)}
+.proj-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.3rem}
+.proj-icon{width:52px;height:52px;border-radius:10px;background:var(--cream3);display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+.proj-link{width:36px;height:36px;border-radius:8px;border:1px solid var(--cream3);background:var(--white);display:flex;align-items:center;justify-content:center;color:var(--ink3);text-decoration:none;transition:all .3s;font-size:.85rem}
+.proj-link:hover{border-color:var(--gold);color:var(--gold);transform:scale(1.1)}
+.proj-card h3{font-family:var(--ff-display);font-size:1.3rem;font-weight:600;color:var(--ink);margin-bottom:.6rem;letter-spacing:-.3px}
+.proj-card p{color:var(--ink3);font-size:.88rem;line-height:1.8;margin-bottom:1.2rem}
+.proj-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.2rem}
+.proj-chip{background:var(--sky3);color:var(--sky);padding:.2rem .7rem;border-radius:50px;font-size:.74rem;font-weight:600;font-family:var(--ff-accent)}
+.proj-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;padding-top:.9rem;border-top:1px solid var(--cream3)}
+.proj-date{font-size:.78rem;color:var(--ink3);font-family:var(--ff-accent)}
+.proj-team{font-size:.78rem;color:var(--teal);background:var(--teal3);padding:.18rem .65rem;border-radius:50px;font-weight:600;font-family:var(--ff-accent)}
+
+/* ═══ SKILLS ═════════════════════════════════ */
+#skills{background:var(--cream)}
+.skills-grid{display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:3.5rem}
+.skill-group{flex:1 1 240px;background:var(--white);border:1px solid var(--cream3);border-radius:8px;padding:1.8rem}
+.sg-title{font-family:var(--ff-accent);font-size:.78rem;text-transform:uppercase;letter-spacing:2.5px;color:var(--gold);margin-bottom:1.3rem;display:flex;align-items:center;gap:.6rem}
+.sg-title::after{content:'';flex:1;height:1px;background:var(--cream3)}
+.skill-item{display:flex;align-items:center;gap:.8rem;padding:.7rem .9rem;border-radius:6px;transition:all .28s;cursor:default}
+.skill-item:hover{background:var(--cream);transform:translateX(4px)}
+.si-icon{width:22px;text-align:center;font-size:.95rem;flex-shrink:0}
+.si-name{font-size:.87rem;color:var(--ink2);flex:1}
+.si-dot{width:6px;height:6px;border-radius:50%;background:var(--teal2);flex-shrink:0}
+
+/* ═══ CERTIFICATIONS ═════════════════════════ */
+#certifications{background:var(--white)}
+.certs-grid{display:flex;flex-wrap:wrap;gap:1.2rem;margin-top:3.5rem}
+.cert-card{flex:1 1 240px;background:var(--cream);border:1px solid var(--cream3);border-radius:8px;padding:1.8rem;position:relative;overflow:hidden;transition:all .35s}
+.cert-card:hover{transform:translateY(-4px);box-shadow:0 10px 32px var(--shadow);background:var(--white)}
+.cert-bg-num{position:absolute;top:-.5rem;right:.8rem;font-family:var(--ff-display);font-size:3.5rem;font-weight:700;color:var(--cream3);line-height:1;pointer-events:none;transition:color .35s}
+.cert-card:hover .cert-bg-num{color:var(--cream2)}
+.cert-icon{font-size:1.6rem;margin-bottom:1rem}
+.cert-name{font-family:var(--ff-display);font-size:1.05rem;font-weight:600;color:var(--ink);margin-bottom:.3rem}
+.cert-issuer{font-size:.8rem;color:var(--gold);font-weight:600;font-family:var(--ff-accent);letter-spacing:.5px;margin-bottom:.25rem}
+.cert-date{font-size:.78rem;color:var(--ink3);margin-bottom:.9rem}
+.cert-link-btn{display:inline-flex;align-items:center;gap:.35rem;font-size:.8rem;color:var(--teal);font-family:var(--ff-accent);font-weight:600;transition:opacity .3s}
+.cert-link-btn:hover{opacity:.7}
+
+/* ═══ ACHIEVEMENTS ═══════════════════════════ */
+#achievements{background:var(--cream)}
+.ach-grid{display:flex;flex-wrap:wrap;gap:1.2rem;margin-top:3.5rem}
+.ach-card{flex:1 1 260px;background:var(--white);border:1px solid var(--cream3);border-radius:8px;padding:1.8rem;transition:all .3s;display:flex;gap:1.2rem;align-items:flex-start}
+.ach-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px var(--shadow)}
+.ach-icon{width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.ach-info h4{font-family:var(--ff-display);font-size:1.05rem;font-weight:600;color:var(--ink);margin-bottom:.3rem}
+.ach-info p{font-size:.86rem;color:var(--ink3);line-height:1.7}
+
+/* ═══ CONTACT ════════════════════════════════ */
+#contact{background:var(--ink);position:relative;overflow:hidden}
+.contact-bg-text{position:absolute;bottom:-3rem;right:-2rem;font-family:var(--ff-display);font-size:12rem;font-weight:700;color:rgba(255,255,255,.02);line-height:1;pointer-events:none;letter-spacing:-4px}
+.contact-section-title{color:var(--cream)!important}
+.contact-section-label{color:var(--gold2)!important}
+.contact-wrapper{display:flex;gap:5rem;margin-top:4rem;flex-wrap:wrap;position:relative;z-index:1}
+.contact-info{flex:1;min-width:260px}
+.contact-intro{color:rgba(255,255,255,.6);line-height:1.9;margin-bottom:2.2rem;font-size:.97rem}
+.contact-items-list{display:flex;flex-direction:column;gap:.9rem}
+.contact-item{display:flex;align-items:center;gap:1.1rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:1.1rem 1.4rem;text-decoration:none;color:var(--cream);transition:all .35s}
+.contact-item:hover{background:rgba(201,151,58,.08);border-color:rgba(201,151,58,.2);transform:translateX(4px)}
+.ci-icon{width:42px;height:42px;border-radius:9px;background:rgba(201,151,58,.12);display:flex;align-items:center;justify-content:center;font-size:.95rem;color:var(--gold);flex-shrink:0}
+.ci-label{font-size:.72rem;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.4);font-family:var(--ff-accent)}
+.ci-val{font-size:.88rem;color:rgba(255,255,255,.85);margin-top:2px}
+.ci-arrow{margin-left:auto;color:rgba(255,255,255,.2);font-size:.8rem;transition:transform .3s}
+.contact-item:hover .ci-arrow{transform:translateX(3px);color:var(--gold)}
+.social-links{display:flex;gap:.8rem;margin-top:2rem}
+.social-btn{width:46px;height:46px;border-radius:9px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);text-decoration:none;font-size:1rem;transition:all .3s}
+.social-btn:hover{background:rgba(201,151,58,.12);border-color:rgba(201,151,58,.25);color:var(--gold);transform:translateY(-3px)}
+
+/* ═══ FOOTER ═════════════════════════════════ */
+footer{background:rgba(10,8,6,1);padding:2rem 5%;border-top:1px solid rgba(255,255,255,.06)}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-family:var(--ff-display);font-size:1.3rem;font-weight:700;color:var(--gold)}
+.footer-copy{font-size:.82rem;color:rgba(255,255,255,.3);font-family:var(--ff-accent)}
+.footer-tagline{font-size:.8rem;color:rgba(255,255,255,.25);font-family:var(--ff-accent)}
+
+/* ═══ ADMIN MODAL ════════════════════════════ */
+.overlay{position:fixed;inset:0;background:rgba(26,22,18,.75);backdrop-filter:blur(12px);z-index:10000;display:none;align-items:center;justify-content:center;padding:2rem}
+.overlay.open{display:flex}
+.modal-box{background:var(--white);border:1px solid var(--cream3);border-radius:12px;padding:2.5rem;width:100%;max-width:400px;animation:fadeUp .3s ease}
+.modal-box h2{font-family:var(--ff-display);font-size:1.8rem;font-weight:600;color:var(--ink);margin-bottom:.4rem}
+.modal-box p{font-size:.9rem;color:var(--ink3);margin-bottom:2rem}
+.field{margin-bottom:1.1rem}
+.field label{font-size:.75rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--ink3);display:block;margin-bottom:.4rem;font-family:var(--ff-accent)}
+.field input,.field textarea,.field select{width:100%;background:var(--cream);border:1px solid var(--cream3);border-radius:6px;padding:.75rem 1rem;font-size:.92rem;font-family:var(--ff-body);color:var(--ink);outline:none;transition:border-color .3s}
+.field textarea{min-height:85px;resize:vertical}
+.field input:focus,.field textarea:focus{border-color:var(--gold)}
+.modal-err{color:var(--rose2);font-size:.85rem;margin-bottom:.8rem;display:none}
+.modal-actions{display:flex;gap:.8rem;margin-top:1.2rem}
+.btn-cancel{flex:1;background:var(--cream);border:1px solid var(--cream3);color:var(--ink2);padding:.8rem;border-radius:6px;cursor:pointer;font-family:var(--ff-body);transition:all .3s}
+.btn-cancel:hover{border-color:var(--rose);color:var(--rose)}
+.btn-confirm{flex:1;background:var(--gold);border:none;color:var(--white);padding:.8rem;border-radius:6px;cursor:pointer;font-family:var(--ff-body);font-weight:600;transition:all .3s}
+.btn-confirm:hover{background:var(--gold2)}
+
+/* ═══ ADMIN PANEL ════════════════════════════ */
+#admin-panel{display:none;padding-top:var(--nav-h);min-height:100vh;background:var(--cream)}
+#admin-panel.open{display:block}
+.admin-bar{background:var(--white);border-bottom:1px solid var(--cream3);padding:1.2rem 5%;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.admin-bar-title{font-family:var(--ff-display);font-size:1.5rem;font-weight:600;color:var(--ink)}
+.admin-bar-actions{display:flex;gap:.8rem}
+.btn-back{background:var(--cream);border:1px solid var(--cream3);color:var(--ink2);padding:.55rem 1.2rem;border-radius:6px;cursor:pointer;font-family:var(--ff-body);font-size:.88rem;display:flex;align-items:center;gap:.4rem;transition:all .3s}
+.btn-back:hover{border-color:var(--gold);color:var(--gold)}
+.admin-wrap{max-width:1140px;margin:0 auto;padding:2rem 5% 4rem}
+.admin-tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:2rem;background:var(--white);border:1px solid var(--cream3);border-radius:8px;padding:.5rem}
+.atab{padding:.5rem 1.1rem;border-radius:5px;font-size:.82rem;font-family:var(--ff-accent);font-weight:500;cursor:pointer;color:var(--ink3);transition:all .3s;border:none;background:transparent;letter-spacing:.3px}
+.atab.active{background:var(--gold);color:var(--white)}
+.atab:hover:not(.active){color:var(--ink)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.a-card{background:var(--white);border:1px solid var(--cream3);border-radius:10px;padding:1.8rem;margin-bottom:1.5rem}
+.a-card-title{font-family:var(--ff-display);font-size:1.1rem;font-weight:600;color:var(--ink);margin-bottom:1.2rem;display:flex;align-items:center;gap:.5rem;padding-bottom:.8rem;border-bottom:1px solid var(--cream3)}
+.a-row{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:.2rem}
+.a-row .field{flex:1;min-width:200px;margin-bottom:0}
+.a-save{background:var(--gold);border:none;color:var(--white);padding:.7rem 1.5rem;border-radius:6px;cursor:pointer;font-family:var(--ff-body);font-weight:600;font-size:.88rem;transition:all .3s;margin-top:.8rem}
+.a-save:hover{background:var(--gold2);transform:translateY(-1px)}
+.a-add{background:var(--teal3);border:1px solid rgba(58,157,142,.25);color:var(--teal);padding:.55rem 1.1rem;border-radius:6px;cursor:pointer;font-family:var(--ff-body);font-size:.85rem;transition:all .3s;display:inline-flex;align-items:center;gap:.4rem;margin-top:.5rem}
+.a-add:hover{background:rgba(58,157,142,.15)}
+.a-del{background:var(--rose3);border:1px solid rgba(184,74,90,.2);color:var(--rose);padding:.35rem .8rem;border-radius:6px;cursor:pointer;font-family:var(--ff-body);font-size:.78rem;transition:all .3s;margin-top:.4rem}
+.a-del:hover{background:rgba(184,74,90,.15)}
+.list-item-box{background:var(--cream);border:1px solid var(--cream3);border-radius:8px;padding:1.2rem;margin-bottom:.8rem}
+.a-note{font-size:.82rem;color:var(--ink3);line-height:1.7;margin-bottom:.8rem;padding:.8rem;background:var(--cream2);border-radius:6px;border-left:3px solid var(--gold)}
+
+/* ═══ TOAST ══════════════════════════════════ */
+#toast{position:fixed;bottom:2rem;right:2rem;background:var(--ink);color:var(--cream);padding:.9rem 1.6rem;border-radius:8px;font-size:.88rem;z-index:99999;opacity:0;transform:translateY(12px);transition:all .32s;display:flex;align-items:center;gap:.5rem;pointer-events:none;border-left:3px solid var(--gold)}
+#toast.show{opacity:1;transform:none}
+
+/* ═══ RESPONSIVE ═════════════════════════════ */
+@media(max-width:900px){
+  .hero-inner{flex-direction:column;text-align:center}
+  .hero-desc,.hero-btns,.hero-stats{margin-left:auto;margin-right:auto}
+  .hero-btns,.hero-stats{justify-content:center}
+  .hero-visual{order:-1}
+  .hero-img-bg{width:220px;height:270px}
+  .ht1,.ht2{display:none}
+  .about-grid{flex-direction:column;gap:2.5rem}
+  .hero-eyebrow{justify-content:center}
+  .section-sub{max-width:100%}
+}
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  nav.solid .nav-links.open, nav.solid .nav-cta.open{display:flex}
+  .footer-inner{flex-direction:column;text-align:center}
+  section{padding:5rem 5%}
+  .edu-card{flex-direction:column;gap:1rem}
+  .edu-year{margin-left:0}
+}
+</style>
+
+<!-- ═══ ADVANCED FEATURES CSS ═══ -->
+<style>
+/* ── BACK TO TOP BUTTON ──────────────────── */
+#btt{position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;border-radius:50%;background:var(--gold);border:none;color:var(--white);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:500;opacity:0;transform:translateY(12px);transition:all .35s;box-shadow:0 4px 16px rgba(201,151,58,.35)}
+#btt.show{opacity:1;transform:translateY(0)}
+#btt:hover{background:var(--gold2);transform:translateY(-3px);box-shadow:0 8px 24px rgba(201,151,58,.45)}
+
+/* ── TYPED CURSOR BLINK ──────────────────── */
+.typed-cursor{display:inline-block;width:3px;height:.85em;background:var(--gold);margin-left:4px;vertical-align:middle;animation:blink .75s step-end infinite;border-radius:1px}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* ── SKILL BAR PROGRESS ─────────────────── */
+.skill-item{position:relative;overflow:hidden}
+.skill-bar{position:absolute;bottom:0;left:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--teal2));border-radius:2px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+
+/* ── ACTIVE NAV INDICATOR ───────────────── */
+.nav-links a.nav-active{color:var(--gold)}
+.nav-links a.nav-active::after{width:100%}
+
+/* ── SECTION COUNTER NUMBERS ────────────── */
+.sec-num{position:absolute;top:5rem;right:5%;font-family:var(--ff-display);font-size:8rem;font-weight:700;color:var(--cream3);line-height:1;pointer-events:none;letter-spacing:-3px;z-index:0}
+
+/* ── PROJECT CARD TILT SHADOW ───────────── */
+.proj-card:hover{box-shadow:0 20px 60px var(--shadow2)}
+
+/* ── IMAGE ZOOM ON HOVER ─────────────────── */
+.hero-img-bg{overflow:hidden}
+.hero-img-bg img{transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.hero-img-bg:hover img{transform:scale(1.04)}
+
+/* ── TOAST UPGRADE ──────────────────────── */
+#toast{display:flex;align-items:center;gap:.6rem}
+#toast i{font-size:.9rem}
+
+/* ── SCROLL PROGRESS BAR ────────────────── */
+#scroll-progress{position:fixed;top:0;left:0;height:2.5px;background:linear-gradient(90deg,var(--gold),var(--teal2));z-index:9999;width:0%;transition:width .1s;pointer-events:none}
+
+/* ── CONTACT CARD GLOW ──────────────────── */
+.contact-item:hover .ci-icon{background:rgba(201,151,58,.22);transform:scale(1.08);transition:all .3s}
+
+/* ── CERT CARD SHIMMER ON HOVER ─────────── */
+.cert-card{overflow:hidden}
+.cert-card::after{content:'';position:absolute;top:-50%;left:-60%;width:40%;height:200%;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.18) 50%,transparent 60%);transform:rotate(15deg);transition:left .55s ease}
+.cert-card:hover::after{left:120%}
+</style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS -->
+<div id="scroll-progress"></div>
+
+<!-- BACK TO TOP -->
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<!-- CURSOR -->
+<div id="cur"></div>
+<div id="cur2"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">MB.</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- ══ PASSWORD MODAL ══ -->
+<div class="overlay" id="passModal">
+  <div class="modal-box">
+    <h2>🔐 Admin Access</h2>
+    <p>Enter your password to continue to the admin panel.</p>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="passInput" placeholder="Enter password" onkeydown="if(event.key==='Enter')checkPass()">
+    </div>
+    <div class="modal-err" id="passErr">Incorrect password. Please try again.</div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('passModal')">Cancel</button>
+      <button class="btn-confirm" onclick="checkPass()">Enter</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ NAV ══ -->
+<nav id="nav">
+  <div class="nav-logo">Mo<span>.</span>Basith</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about" onclick="closeMobileMenu()">About</a></li>
+    <li><a href="#education" onclick="closeMobileMenu()">Education</a></li>
+    <li><a href="#experience" onclick="closeMobileMenu()">Experience</a></li>
+    <li><a href="#projects" onclick="closeMobileMenu()">Projects</a></li>
+    <li><a href="#skills" onclick="closeMobileMenu()">Skills</a></li>
+    <li><a href="#certifications" onclick="closeMobileMenu()">Certifications</a></li>
+    <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <button class="nav-admin-btn" onclick="openModal('passModal')"><i class="fas fa-lock"></i> Admin</button>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleMobile()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobileMenu()">About</a>
+  <a href="#education" onclick="closeMobileMenu()">Education</a>
+  <a href="#experience" onclick="closeMobileMenu()">Experience</a>
+  <a href="#projects" onclick="closeMobileMenu()">Projects</a>
+  <a href="#skills" onclick="closeMobileMenu()">Skills</a>
+  <a href="#certifications" onclick="closeMobileMenu()">Certifications</a>
+  <a href="#achievements" onclick="closeMobileMenu()">Achievements</a>
+  <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+</div>
+
+<!-- ══════════════════════════════════════════
+     MAIN PORTFOLIO
+══════════════════════════════════════════ -->
+<div id="portfolio">
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grain"></div>
+  <div class="hero-line hero-line-1"></div>
+  <div class="hero-line hero-line-2"></div>
+  <div class="hero-line hero-line-3"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-line"></span>
+        <span id="p-badge">Available for Opportunities</span>
+      </div>
+      <h1 class="hero-name">
+        <span id="p-fname">Mohamed Basith</span>
+        <em id="p-lname">Basheer Ahamed</em>
+      </h1>
+      <p class="hero-role" id="p-role">B.E. Mechanical Engineering</p>
+      <p class="hero-desc" id="p-desc">Passionate mechanical engineer with hands-on experience in EV battery manufacturing, additive manufacturing, and web development. Building the future one component at a time.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-gold"><i class="fas fa-paper-plane"></i> Contact Me</a>
+        <a href="#" class="btn-outline" id="p-resume-btn" onclick="return downloadResume()"><i class="fas fa-download"></i> Download Resume</a>
+        <a href="#" class="btn-outline" id="p-linkedin-btn" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num"><em id="p-s1n">7.44</em></div><div class="stat-label" id="p-s1l">CGPA Score</div></div>
+        <div class="stat"><div class="stat-num"><em id="p-s2n">3+</em></div><div class="stat-label" id="p-s2l">Projects</div></div>
+        <div class="stat"><div class="stat-num"><em id="p-s3n">1</em></div><div class="stat-label" id="p-s3l">Internship</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img-wrap">
+        <div class="hero-img-bg" id="p-avatar">
+          <div class="hero-initials-display" id="p-initials">MB</div>
+        </div>
+        <div class="hero-frame"></div>
+        <div class="hero-tag ht1">
+          <div class="hero-tag-icon" style="background:#fff8ed">⚡</div>
+          <div><div style="font-size:.7rem;color:var(--ink3)">Current Role</div><div style="font-size:.82rem;font-weight:600">EV Manufacturing</div></div>
+        </div>
+        <div class="hero-tag ht2">
+          <div class="hero-tag-icon" style="background:#f0faf8">🎓</div>
+          <div><div style="font-size:.7rem;color:var(--ink3)">Graduating</div><div style="font-size:.82rem;font-weight:600">2026</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label">Who I Am</div>
+    <h2 class="section-title">About <em>Me</em></h2>
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p id="p-about1">I'm Mohamed Basith Basheer Ahamed, a final-year Mechanical Engineering student at SKN Sinhgad College of Engineering, Pandharpur. I have a deep passion for innovation, manufacturing technology, and building things that make a real-world impact.</p>
+        <p id="p-about2">My experience spans from EV battery manufacturing at EMotorad to leading a team project on building a low-cost 3D printer. I also possess web development skills, making me a versatile engineer who bridges hardware and software.</p>
+        <p id="p-about3">I believe engineering is not just about solving problems — it's about creating solutions that are accessible, efficient, and meaningful. I'm actively seeking opportunities to grow and contribute in the field of core engineering and manufacturing.</p>
+      </div>
+      <div class="about-aside">
+        <div class="about-card">
+          <div class="detail-item">
+            <div class="di-icon"><i class="fas fa-user"></i></div>
+            <div><div class="di-key">Full Name</div><div class="di-val" id="p-fullname">Mohamed Basith Basheer Ahamed</div></div>
+          </div>
+          <div class="detail-item">
+            <div class="di-icon"><i class="fas fa-birthday-cake"></i></div>
+            <div><div class="di-key">Date of Birth</div><div class="di-val" id="p-dob">16 May, 2004</div></div>
+          </div>
+          <div class="detail-item">
+            <div class="di-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div><div class="di-key">Location</div><div class="di-val" id="p-loc">Pandharpur, Maharashtra, India</div></div>
+          </div>
+          <div class="detail-item">
+            <div class="di-icon"><i class="fas fa-phone"></i></div>
+            <div><div class="di-key">Phone</div><div class="di-val" id="p-phone">+91-9028580906</div></div>
+          </div>
+          <div class="detail-item">
+            <div class="di-icon"><i class="fas fa-venus-mars"></i></div>
+            <div><div class="di-key">Gender / Status</div><div class="di-val" id="p-gender">Male · Single</div></div>
+          </div>
+          <div class="detail-item">
+            <div class="di-icon"><i class="fas fa-language"></i></div>
+            <div>
+              <div class="di-key">Languages</div>
+              <div class="lang-chips" id="p-langs">
+                <span class="lang-chip">Hindi</span>
+                <span class="lang-chip">Tamil</span>
+                <span class="lang-chip">English</span>
+                <span class="lang-chip">Marathi</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-label">Academic Journey</div>
+    <h2 class="section-title">My <em>Education</em></h2>
+    <p class="section-sub">A strong academic foundation in engineering and sciences.</p>
+    <div class="edu-list reveal" id="p-edu-list">
+      <div class="edu-card">
+        <div class="edu-icon-wrap">🎓</div>
+        <div class="edu-info">
+          <h3>SKN Sinhgad College Of Engineering, Pandharpur</h3>
+          <p>B.E. – Mechanical Engineering</p>
+          <span class="edu-badge">CGPA: 7.44 / 10</span>
+        </div>
+        <div class="edu-year">2022 – 2026</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-icon-wrap">📚</div>
+        <div class="edu-info">
+          <h3>Vivek Vardhani Vidyalay Junior College, Pandharpur</h3>
+          <p>12th – MSBSHSE</p>
+          <span class="edu-badge">68.33 / 100</span>
+        </div>
+        <div class="edu-year">2022</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-icon-wrap">🏫</div>
+        <div class="edu-info">
+          <h3>Panchratna English Medium School, Pandharpur</h3>
+          <p>10th – MSBSHSE</p>
+          <span class="edu-badge">60 / 100</span>
+        </div>
+        <div class="edu-year">2020</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-label exp-section-label">Work Experience</div>
+    <h2 class="section-title exp-section-title">Internship & <em>Experience</em></h2>
+    <p class="section-sub exp-section-sub">Real-world exposure shaping engineering expertise.</p>
+    <div id="p-exp-list">
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <div class="exp-logo">⚡</div>
+          <div class="exp-meta">
+            <h3 id="p-exp-company">E Motorad E Bicycle Manufacturing</h3>
+            <div class="role" id="p-exp-role">Associate Engineer Trainee – Battery Manufacturing</div>
+          </div>
+          <div class="exp-duration-badge" id="p-exp-dur">14 Jan, 2026 – 14 Feb, 2026</div>
+        </div>
+        <p class="exp-desc" id="p-exp-desc">Working in the battery manufacturing unit of a fast-growing EV company, supporting day-to-day production and quality operations. Actively involved in battery pack assembly, inspection, and testing activities to ensure product reliability and safety. Performed Pre-Dispatch Inspection (PDI) and assisted in quality assurance processes as per defined standards. Supported ERP documentation and production data tracking for materials, processes, and inspections.</p>
+        <div class="exp-chips" id="p-exp-chips">
+          <span class="exp-chip">Analysis</span><span class="exp-chip">Production</span><span class="exp-chip">Manufacturing</span><span class="exp-chip">Testing</span><span class="exp-chip">ERP</span><span class="exp-chip">PDI</span><span class="exp-chip">Battery Assembly</span><span class="exp-chip">Quality Assurance</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-label">My Work</div>
+    <h2 class="section-title">Featured <em>Projects</em></h2>
+    <p class="section-sub">Hands-on projects combining creativity, engineering, and technology.</p>
+    <div class="projects-grid reveal" id="p-proj-grid">
+      <div class="proj-card">
+        <div class="proj-top"><div class="proj-icon">🖨️</div><a href="https://tinyurl.com/4pedpk2w" target="_blank" class="proj-link"><i class="fas fa-external-link-alt"></i></a></div>
+        <h3>Low Cost 3D Printer</h3>
+        <p>Design and development of an affordable 3D printer using Arduino & Marlin Firmware, SolidWorks, Ultimaker Cura. Led a team of 4, making additive manufacturing accessible to students and small industries.</p>
+        <div class="proj-chips"><span class="proj-chip">Arduino</span><span class="proj-chip">SolidWorks</span><span class="proj-chip">Marlin</span><span class="proj-chip">Team Lead</span></div>
+        <div class="proj-footer"><span class="proj-date">Aug 2025 – Oct 2025</span><span class="proj-team">👥 Team of 4</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-top"><div class="proj-icon">🌐</div><a href="https://basith77proj2.ccbp.tech/" target="_blank" class="proj-link"><i class="fas fa-external-link-alt"></i></a></div>
+        <h3>Responsive Website</h3>
+        <p>Designed a fully responsive website using HTML5 and CSS with Flexbox, Media Queries, modern UI design and cross-device compatibility. Focused on UX and accessibility.</p>
+        <div class="proj-chips"><span class="proj-chip">HTML5</span><span class="proj-chip">CSS3</span><span class="proj-chip">Flexbox</span><span class="proj-chip">Bootstrap</span></div>
+        <div class="proj-footer"><span class="proj-date">Dec 2024 – Feb 2025</span><span class="proj-team">👤 Solo</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-top"><div class="proj-icon">💻</div><a href="https://basith77works.ccbp.tech/" target="_blank" class="proj-link"><i class="fas fa-external-link-alt"></i></a></div>
+        <h3>Static Website</h3>
+        <p>Developed a responsive static website using HTML and CSS showcasing structured content. Implemented Flexbox and Grid for clean layout with cross-device compatibility.</p>
+        <div class="proj-chips"><span class="proj-chip">HTML5</span><span class="proj-chip">CSS3</span><span class="proj-chip">Flexbox</span><span class="proj-chip">Grid</span></div>
+        <div class="proj-footer"><span class="proj-date">Sep 2024 – Oct 2024</span><span class="proj-team">👤 Solo</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label">Technical Arsenal</div>
+    <h2 class="section-title">Skills & <em>Expertise</em></h2>
+    <p class="section-sub">A blend of mechanical engineering expertise and modern digital capabilities.</p>
+    <div class="skills-grid reveal" id="p-skills-grid">
+      <div class="skill-group">
+        <div class="sg-title">Core Engineering</div>
+        <div class="skill-item"><span class="si-icon">⚙️</span><span class="si-name">Manufacturing & Production</span><span class="si-dot"></span></div>
+        <div class="skill-item"><span class="si-icon">🔋</span><span class="si-name">Battery Pack Assembly</span><span class="si-dot"></span></div>
+        <div class="skill-item"><span class="si-icon">🔍</span><span class="si-name">Quality Assurance & PDI</span><span class="si-dot"></span></div>
+        <div class="skill-item"><span class="si-icon">📊</span><span class="si-name">ERP & Documentation</span><span class="si-dot"></span></div>
+        <div class="skill-item"><span class="si-icon">🧪</span><span class="si-name">Testing & Inspection</span><span class="si-dot"></span></div>
+      </div>
+      <div class="skill-group">
+        <div class="sg-title">Design & CAD</div>
+        <div class="skill-item"><span class="si-icon">🖥️</span><span class="si-name">SolidWorks</span><span class="si-dot"></span></div>
+        <div class="skill-item"><span class="si-icon">🤖</span><span class="si-name">Arduino & Marlin Firmware</span><span class="si-dot"></span></div>
+        <div class="skill-item"><span class="si-icon">🖨️</span><span class="si-name">Ultimaker Cura & Pronterface</span><span class="si-dot"></span></div>
+        <div class="skill-item"><span class="si-icon">🔩</span><span class="si-name">Robotics & Assembly</span><span class="si-dot"></span></div>
+      </div>
+      <div class="skill-group">
+        <div class="sg-title">Web Development</div>
+        <div class="skill-item"><span class="si-icon">🌐</span><span class="si-name">HTML5 & Semantic Markup</span><span class="si-dot"></span></div>
+        <div class="skill-item"><span class="si-icon">🎨</span><span class="si-name">CSS3 & Flexbox</span><span class="si-dot"></span></div>
+        <div class="skill-item"><span class="si-icon">📱</span><span class="si-name">Bootstrap & Responsive Design</span><span class="si-dot"></span></div>
+        <div class="skill-item"><span class="si-icon">🔗</span><span class="si-name">Grid Layouts & Animations</span><span class="si-dot"></span></div>
+      </div>
+      <div class="skill-group">
+        <div class="sg-title">Soft Skills</div>
+        <div class="skill-item"><span class="si-icon">👑</span><span class="si-name">Team Leadership</span><span class="si-dot"></span></div>
+        <div class="skill-item"><span class="si-icon">🧩</span><span class="si-name">Problem Solving</span><span class="si-dot"></span></div>
+        <div class="skill-item"><span class="si-icon">🗂️</span><span class="si-name">Project Management</span><span class="si-dot"></span></div>
+        <div class="skill-item"><span class="si-icon">📐</span><span class="si-name">Analysis & Research</span><span class="si-dot"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-inner">
+    <div class="section-label">Credentials</div>
+    <h2 class="section-title">Certifications & <em>Training</em></h2>
+    <p class="section-sub">Continuous learning and professional development milestones.</p>
+    <div class="certs-grid reveal" id="p-certs-grid">
+      <div class="cert-card">
+        <div class="cert-bg-num">01</div>
+        <div class="cert-icon">🌐</div>
+        <div class="cert-name">Responsive Web Design</div>
+        <div class="cert-issuer">NxtWave</div>
+        <div class="cert-date">Feb 2025</div>
+        <a href="https://basith77proj2.ccbp.tech/" target="_blank" class="cert-link-btn"><i class="fas fa-external-link-alt"></i> View</a>
+      </div>
+      <div class="cert-card">
+        <div class="cert-bg-num">02</div>
+        <div class="cert-icon">🖨️</div>
+        <div class="cert-name">3D Printer Design & Development</div>
+        <div class="cert-issuer">SKN Sinhgad COE</div>
+        <div class="cert-date">Oct 2025</div>
+        <a href="https://tinyurl.com/4pedpk2w" target="_blank" class="cert-link-btn"><i class="fas fa-external-link-alt"></i> View</a>
+      </div>
+      <div class="cert-card">
+        <div class="cert-bg-num">03</div>
+        <div class="cert-icon">⚡</div>
+        <div class="cert-name">EV Battery Manufacturing Internship</div>
+        <div class="cert-issuer">EMotorad</div>
+        <div class="cert-date">Feb 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-inner">
+    <div class="section-label">Highlights</div>
+    <h2 class="section-title">Achievements & <em>Milestones</em></h2>
+    <p class="section-sub">Key accomplishments that define my journey.</p>
+    <div class="ach-grid reveal" id="p-ach-grid">
+      <div class="ach-card">
+        <div class="ach-icon">🏆</div>
+        <div class="ach-info">
+          <h4>3D Printer Project Leader</h4>
+          <p>Led a team of 4 students in successfully designing and building a low-cost 3D printer at SKN Sinhgad COE.</p>
+        </div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon">⚡</div>
+        <div class="ach-info">
+          <h4>EMotorad EV Internship</h4>
+          <p>Completed a professional internship at a fast-growing EV startup, gaining hands-on manufacturing experience.</p>
+        </div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon">🌐</div>
+        <div class="ach-info">
+          <h4>Full-Stack Web Projects</h4>
+          <p>Independently built two fully responsive websites using HTML, CSS, and modern layout techniques.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label contact-section-label">Let's Connect</div>
+    <h2 class="section-title contact-section-title">Get In <em style="color:var(--gold)">Touch</em></h2>
+    <div class="contact-wrapper">
+      <div class="contact-info reveal">
+        <p class="contact-intro" id="p-contact-intro">I'm currently open to internship opportunities, full-time roles, and interesting project collaborations. Whether you have a question or just want to say hi — my inbox is always open!</p>
+        <div class="contact-items-list">
+          <a class="contact-item" id="p-phone-link" href="tel:+919028580906">
+            <div class="ci-icon"><i class="fas fa-phone"></i></div>
+            <div><div class="ci-label">Call Me</div><div class="ci-val" id="p-c-phone">+91-9028580906</div></div>
+            <i class="fas fa-arrow-right ci-arrow"></i>
+          </a>
+          <a class="contact-item" id="p-email1-link" href="mailto:mohamedbasith.sknscoe.mech77@gmail.com">
+            <div class="ci-icon"><i class="fas fa-envelope"></i></div>
+            <div><div class="ci-label">Primary Email</div><div class="ci-val" id="p-c-email1">mohamedbasith.sknscoe.mech77@gmail.com</div></div>
+            <i class="fas fa-arrow-right ci-arrow"></i>
+          </a>
+          <a class="contact-item" id="p-email2-link" href="mailto:mohamedbasithmohamedbasith804@gmail.com">
+            <div class="ci-icon"><i class="fas fa-envelope"></i></div>
+            <div><div class="ci-label">Alternate Email</div><div class="ci-val" id="p-c-email2">mohamedbasithmohamedbasith804@gmail.com</div></div>
+            <i class="fas fa-arrow-right ci-arrow"></i>
+          </a>
+          <a class="contact-item" id="p-li-link" href="https://www.linkedin.com/in/mohamedbasith77/" target="_blank">
+            <div class="ci-icon"><i class="fab fa-linkedin"></i></div>
+            <div><div class="ci-label">LinkedIn</div><div class="ci-val">linkedin.com/in/mohamedbasith77</div></div>
+            <i class="fas fa-arrow-right ci-arrow"></i>
+          </a>
+        </div>
+        <div class="social-links">
+          <a class="social-btn" id="p-soc-li" href="https://www.linkedin.com/in/mohamedbasith77/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          <a class="social-btn" href="mailto:mohamedbasith.sknscoe.mech77@gmail.com"><i class="fas fa-envelope"></i></a>
+          <a class="social-btn" href="tel:+919028580906"><i class="fas fa-phone"></i></a>
+          <a class="social-btn" id="p-soc-gh" href="#" style="display:none"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="contact-bg-text">HELLO</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand" id="p-footer-brand">Mohamed Basith</div>
+    <div class="footer-tagline" id="p-footer-tag">B.E. Mechanical Engineering · EMotorad Intern</div>
+    <div class="footer-copy">© <span id="p-year">2026</span> All Rights Reserved</div>
+  </div>
+</footer>
+
+</div><!-- /portfolio -->
+
+<!-- ══════════════════════════════════════════
+     ADMIN PANEL
+══════════════════════════════════════════ -->
+<div id="admin-panel">
+  <div class="admin-bar">
+    <div class="admin-bar-title">🛠 Admin Panel</div>
+    <div class="admin-bar-actions">
+      <button class="btn-back" onclick="exitAdmin()"><i class="fas fa-arrow-left"></i> Back to Portfolio</button>
+    </div>
+  </div>
+  <div class="admin-wrap">
+    <div class="a-note">✨ All changes apply instantly to the portfolio. Nothing requires page refresh.</div>
+
+    <!-- TABS -->
+    <div class="admin-tabs">
+      <button class="atab active" onclick="switchTab('tab-hero',this)">Hero</button>
+      <button class="atab" onclick="switchTab('tab-about',this)">About</button>
+      <button class="atab" onclick="switchTab('tab-exp',this)">Experience</button>
+      <button class="atab" onclick="switchTab('tab-projects',this)">Projects</button>
+      <button class="atab" onclick="switchTab('tab-edu',this)">Education</button>
+      <button class="atab" onclick="switchTab('tab-certs',this)">Certifications</button>
+      <button class="atab" onclick="switchTab('tab-skills',this)">Skills</button>
+      <button class="atab" onclick="switchTab('tab-ach',this)">Achievements</button>
+      <button class="atab" onclick="switchTab('tab-contact',this)">Contact</button>
+      <button class="atab" onclick="switchTab('tab-footer',this)">Footer</button>
+      <button class="atab" onclick="switchTab('tab-pass',this)">Password</button>
+    </div>
+
+    <!-- TAB: HERO -->
+    <div id="tab-hero" class="tab-content active">
+      <div class="a-card">
+        <div class="a-card-title">🏠 Hero Section</div>
+        <div class="a-row">
+          <div class="field"><label>Badge Text</label><input id="a-badge" value="Available for Opportunities"></div>
+          <div class="field"><label>Profile Photo URL</label><input id="a-photo" placeholder="Paste image URL or leave blank for initials"></div>
+        </div>
+        <div class="a-row">
+          <div class="field"><label>First Name</label><input id="a-fname" value="Mohamed Basith"></div>
+          <div class="field"><label>Last Name (italic)</label><input id="a-lname" value="Basheer Ahamed"></div>
+        </div>
+        <div class="field"><label>Role / Title</label><input id="a-role" value="B.E. Mechanical Engineering"></div>
+        <div class="field"><label>Description</label><textarea id="a-desc">Passionate mechanical engineer with hands-on experience in EV battery manufacturing, additive manufacturing, and web development. Building the future one component at a time.</textarea></div>
+        <div class="a-row">
+          <div class="field"><label>Stat 1 Number</label><input id="a-s1n" value="7.44"></div>
+          <div class="field"><label>Stat 1 Label</label><input id="a-s1l" value="CGPA Score"></div>
+        </div>
+        <div class="a-row">
+          <div class="field"><label>Stat 2 Number</label><input id="a-s2n" value="3+"></div>
+          <div class="field"><label>Stat 2 Label</label><input id="a-s2l" value="Projects"></div>
+        </div>
+        <div class="a-row">
+          <div class="field"><label>Stat 3 Number</label><input id="a-s3n" value="1"></div>
+          <div class="field"><label>Stat 3 Label</label><input id="a-s3l" value="Internship"></div>
+        </div>
+        <div class="a-row">
+          <div class="field"><label>LinkedIn URL</label><input id="a-linkedin" value="https://www.linkedin.com/in/mohamedbasith77/"></div>
+          <div class="field"><label>Resume Download URL</label><input id="a-resume" placeholder="Google Drive shareable link"></div>
+        </div>
+        <div class="field"><label>GitHub URL (leave blank to hide)</label><input id="a-github" placeholder="https://github.com/..."></div>
+        <button class="a-save" onclick="saveHero()">Save Hero Section</button>
+      </div>
+    </div>
+
+    <!-- TAB: ABOUT -->
+    <div id="tab-about" class="tab-content">
+      <div class="a-card">
+        <div class="a-card-title">👤 About Me</div>
+        <div class="a-row">
+          <div class="field"><label>Full Name</label><input id="a-fullname" value="Mohamed Basith Basheer Ahamed"></div>
+          <div class="field"><label>Date of Birth</label><input id="a-dob" value="16 May, 2004"></div>
+        </div>
+        <div class="a-row">
+          <div class="field"><label>Gender</label><input id="a-gender" value="Male · Single"></div>
+          <div class="field"><label>Location</label><input id="a-loc" value="Pandharpur, Maharashtra, India"></div>
+        </div>
+        <div class="field"><label>Phone (shown in about)</label><input id="a-aphone" value="+91-9028580906"></div>
+        <div class="field"><label>Languages (comma separated)</label><input id="a-langs" value="Hindi,Tamil,English,Marathi"></div>
+        <div class="field"><label>About Paragraph 1</label><textarea id="a-p1">I'm Mohamed Basith Basheer Ahamed, a final-year Mechanical Engineering student at SKN Sinhgad College of Engineering, Pandharpur. I have a deep passion for innovation, manufacturing technology, and building things that make a real-world impact.</textarea></div>
+        <div class="field"><label>About Paragraph 2</label><textarea id="a-p2">My experience spans from EV battery manufacturing at EMotorad to leading a team project on building a low-cost 3D printer. I also possess web development skills, making me a versatile engineer who bridges hardware and software.</textarea></div>
+        <div class="field"><label>About Paragraph 3</label><textarea id="a-p3">I believe engineering is not just about solving problems — it's about creating solutions that are accessible, efficient, and meaningful. I'm actively seeking opportunities to grow and contribute in the field of core engineering and manufacturing.</textarea></div>
+        <button class="a-save" onclick="saveAbout()">Save About Section</button>
+      </div>
+    </div>
+
+    <!-- TAB: EXPERIENCE -->
+    <div id="tab-exp" class="tab-content">
+      <div class="a-card">
+        <div class="a-card-title">💼 Experience / Internship</div>
+        <div class="field"><label>Company Name</label><input id="a-company" value="E Motorad E Bicycle Manufacturing"></div>
+        <div class="field"><label>Role / Position</label><input id="a-erole" value="Associate Engineer Trainee – Battery Manufacturing"></div>
+        <div class="field"><label>Duration</label><input id="a-edur" value="14 Jan, 2026 – 14 Feb, 2026"></div>
+        <div class="field"><label>Description</label><textarea id="a-edesc">Working in the battery manufacturing unit of a fast-growing EV company, supporting day-to-day production and quality operations. Actively involved in battery pack assembly, inspection, and testing activities to ensure product reliability and safety. Performed Pre-Dispatch Inspection (PDI) and assisted in quality assurance processes as per defined standards. Supported ERP documentation and production data tracking for materials, processes, and inspections.</textarea></div>
+        <div class="field"><label>Skills (comma separated)</label><input id="a-eskills" value="Analysis,Production,Manufacturing,Testing,ERP,PDI,Battery Assembly,Quality Assurance"></div>
+        <button class="a-save" onclick="saveExp()">Save Experience</button>
+      </div>
+    </div>
+
+    <!-- TAB: PROJECTS -->
+    <div id="tab-projects" class="tab-content">
+      <div class="a-card">
+        <div class="a-card-title">💡 Projects</div>
+        <div id="a-proj-list">
+          <div class="list-item-box">
+            <div class="a-row">
+              <div class="field" style="flex:2"><label>Title</label><input data-p="title" value="Low Cost 3D Printer"></div>
+              <div class="field" style="flex:0 0 80px"><label>Icon</label><input data-p="icon" value="🖨️"></div>
+            </div>
+            <div class="field"><label>Description</label><textarea data-p="desc">Design and development of an affordable 3D printer using Arduino & Marlin Firmware, SolidWorks, Ultimaker Cura. Led a team of 4, making additive manufacturing accessible to students and small industries.</textarea></div>
+            <div class="a-row">
+              <div class="field"><label>Project URL</label><input data-p="link" value="https://tinyurl.com/4pedpk2w"></div>
+              <div class="field"><label>Date Range</label><input data-p="date" value="Aug 2025 – Oct 2025"></div>
+              <div class="field" style="flex:0 0 140px"><label>Team</label><input data-p="team" value="Team of 4"></div>
+            </div>
+            <div class="field"><label>Skills (comma separated)</label><input data-p="skills" value="Arduino,SolidWorks,Marlin,Team Lead"></div>
+            <button class="a-del" onclick="removeItem(this)">✕ Remove</button>
+          </div>
+          <div class="list-item-box">
+            <div class="a-row">
+              <div class="field" style="flex:2"><label>Title</label><input data-p="title" value="Responsive Website"></div>
+              <div class="field" style="flex:0 0 80px"><label>Icon</label><input data-p="icon" value="🌐"></div>
+            </div>
+            <div class="field"><label>Description</label><textarea data-p="desc">Designed a fully responsive website using HTML5 and CSS with Flexbox, Media Queries, modern UI design and cross-device compatibility. Focused on UX and accessibility.</textarea></div>
+            <div class="a-row">
+              <div class="field"><label>Project URL</label><input data-p="link" value="https://basith77proj2.ccbp.tech/"></div>
+              <div class="field"><label>Date Range</label><input data-p="date" value="Dec 2024 – Feb 2025"></div>
+              <div class="field" style="flex:0 0 140px"><label>Team</label><input data-p="team" value="Solo"></div>
+            </div>
+            <div class="field"><label>Skills (comma separated)</label><input data-p="skills" value="HTML5,CSS3,Flexbox,Bootstrap"></div>
+            <button class="a-del" onclick="removeItem(this)">✕ Remove</button>
+          </div>
+          <div class="list-item-box">
+            <div class="a-row">
+              <div class="field" style="flex:2"><label>Title</label><input data-p="title" value="Static Website"></div>
+              <div class="field" style="flex:0 0 80px"><label>Icon</label><input data-p="icon" value="💻"></div>
+            </div>
+            <div class="field"><label>Description</label><textarea data-p="desc">Developed a responsive static website using HTML and CSS showcasing structured content. Implemented Flexbox and Grid for clean layout with cross-device compatibility.</textarea></div>
+            <div class="a-row">
+              <div class="field"><label>Project URL</label><input data-p="link" value="https://basith77works.ccbp.tech/"></div>
+              <div class="field"><label>Date Range</label><input data-p="date" value="Sep 2024 – Oct 2024"></div>
+              <div class="field" style="flex:0 0 140px"><label>Team</label><input data-p="team" value="Solo"></div>
+            </div>
+            <div class="field"><label>Skills (comma separated)</label><input data-p="skills" value="HTML5,CSS3,Flexbox,Grid"></div>
+            <button class="a-del" onclick="removeItem(this)">✕ Remove</button>
+          </div>
+        </div>
+        <button class="a-add" onclick="addProject()"><i class="fas fa-plus"></i> Add New Project</button>
+        <button class="a-save" onclick="saveProjects()">Save All Projects</button>
+      </div>
+    </div>
+
+    <!-- TAB: EDUCATION -->
+    <div id="tab-edu" class="tab-content">
+      <div class="a-card">
+        <div class="a-card-title">🎓 Education</div>
+        <div id="a-edu-list">
+          <div class="list-item-box">
+            <div class="a-row">
+              <div class="field" style="flex:3"><label>Institution</label><input data-e="inst" value="SKN Sinhgad College Of Engineering, Pandharpur"></div>
+              <div class="field" style="flex:0 0 70px"><label>Icon</label><input data-e="icon" value="🎓"></div>
+            </div>
+            <div class="a-row">
+              <div class="field"><label>Degree / Level</label><input data-e="degree" value="B.E. – Mechanical Engineering"></div>
+              <div class="field" style="flex:0 0 140px"><label>Score / Grade</label><input data-e="score" value="CGPA: 7.44 / 10"></div>
+              <div class="field" style="flex:0 0 120px"><label>Year</label><input data-e="year" value="2022 – 2026"></div>
+            </div>
+            <button class="a-del" onclick="removeItem(this)">✕ Remove</button>
+          </div>
+          <div class="list-item-box">
+            <div class="a-row">
+              <div class="field" style="flex:3"><label>Institution</label><input data-e="inst" value="Vivek Vardhani Vidyalay Junior College, Pandharpur"></div>
+              <div class="field" style="flex:0 0 70px"><label>Icon</label><input data-e="icon" value="📚"></div>
+            </div>
+            <div class="a-row">
+              <div class="field"><label>Degree / Level</label><input data-e="degree" value="12th – MSBSHSE"></div>
+              <div class="field" style="flex:0 0 140px"><label>Score / Grade</label><input data-e="score" value="68.33 / 100"></div>
+              <div class="field" style="flex:0 0 120px"><label>Year</label><input data-e="year" value="2022"></div>
+            </div>
+            <button class="a-del" onclick="removeItem(this)">✕ Remove</button>
+          </div>
+          <div class="list-item-box">
+            <div class="a-row">
+              <div class="field" style="flex:3"><label>Institution</label><input data-e="inst" value="Panchratna English Medium School, Pandharpur"></div>
+              <div class="field" style="flex:0 0 70px"><label>Icon</label><input data-e="icon" value="🏫"></div>
+            </div>
+            <div class="a-row">
+              <div class="field"><label>Degree / Level</label><input data-e="degree" value="10th – MSBSHSE"></div>
+              <div class="field" style="flex:0 0 140px"><label>Score / Grade</label><input data-e="score" value="60 / 100"></div>
+              <div class="field" style="flex:0 0 120px"><label>Year</label><input data-e="year" value="2020"></div>
+            </div>
+            <button class="a-del" onclick="removeItem(this)">✕ Remove</button>
+          </div>
+        </div>
+        <button class="a-add" onclick="addEducation()"><i class="fas fa-plus"></i> Add Education</button>
+        <button class="a-save" onclick="saveEducation()">Save Education</button>
+      </div>
+    </div>
+
+    <!-- TAB: CERTIFICATIONS -->
+    <div id="tab-certs" class="tab-content">
+      <div class="a-card">
+        <div class="a-card-title">🏆 Certifications</div>
+        <div id="a-cert-list">
+          <div class="list-item-box">
+            <div class="a-row">
+              <div class="field" style="flex:3"><label>Certificate Name</label><input data-c="name" value="Responsive Web Design"></div>
+              <div class="field" style="flex:0 0 70px"><label>Icon</label><input data-c="icon" value="🌐"></div>
+            </div>
+            <div class="a-row">
+              <div class="field"><label>Issuer</label><input data-c="issuer" value="NxtWave"></div>
+              <div class="field" style="flex:0 0 140px"><label>Date</label><input data-c="date" value="Feb 2025"></div>
+              <div class="field"><label>Link (optional)</label><input data-c="link" value="https://basith77proj2.ccbp.tech/"></div>
+            </div>
+            <button class="a-del" onclick="removeItem(this)">✕ Remove</button>
+          </div>
+          <div class="list-item-box">
+            <div class="a-row">
+              <div class="field" style="flex:3"><label>Certificate Name</label><input data-c="name" value="3D Printer Design & Development"></div>
+              <div class="field" style="flex:0 0 70px"><label>Icon</label><input data-c="icon" value="🖨️"></div>
+            </div>
+            <div class="a-row">
+              <div class="field"><label>Issuer</label><input data-c="issuer" value="SKN Sinhgad COE"></div>
+              <div class="field" style="flex:0 0 140px"><label>Date</label><input data-c="date" value="Oct 2025"></div>
+              <div class="field"><label>Link (optional)</label><input data-c="link" value="https://tinyurl.com/4pedpk2w"></div>
+            </div>
+            <button class="a-del" onclick="removeItem(this)">✕ Remove</button>
+          </div>
+          <div class="list-item-box">
+            <div class="a-row">
+              <div class="field" style="flex:3"><label>Certificate Name</label><input data-c="name" value="EV Battery Manufacturing Internship"></div>
+              <div class="field" style="flex:0 0 70px"><label>Icon</label><input data-c="icon" value="⚡"></div>
+            </div>
+            <div class="a-row">
+              <div class="field"><label>Issuer</label><input data-c="issuer" value="EMotorad"></div>
+              <div class="field" style="flex:0 0 140px"><label>Date</label><input data-c="date" value="Feb 2026"></div>
+              <div class="field"><label>Link (optional)</label><input data-c="link" value=""></div>
+            </div>
+            <button class="a-del" onclick="removeItem(this)">✕ Remove</button>
+          </div>
+        </div>
+        <button class="a-add" onclick="addCert()"><i class="fas fa-plus"></i> Add Certification</button>
+        <button class="a-save" onclick="saveCerts()">Save Certifications</button>
+      </div>
+    </div>
+
+    <!-- TAB: SKILLS -->
+    <div id="tab-skills" class="tab-content">
+      <div class="a-card">
+        <div class="a-card-title">⚙️ Skills</div>
+        <div id="a-skills-list">
+          <div class="list-item-box">
+            <div class="field"><label>Group Title</label><input data-sg="title" value="Core Engineering"></div>
+            <div class="field"><label>Skills (one per line, format: emoji Name)</label><textarea data-sg="skills">⚙️ Manufacturing & Production
+🔋 Battery Pack Assembly
+🔍 Quality Assurance & PDI
+📊 ERP & Documentation
+🧪 Testing & Inspection</textarea></div>
+            <button class="a-del" onclick="removeItem(this)">✕ Remove</button>
+          </div>
+          <div class="list-item-box">
+            <div class="field"><label>Group Title</label><input data-sg="title" value="Design & CAD"></div>
+            <div class="field"><label>Skills (one per line)</label><textarea data-sg="skills">🖥️ SolidWorks
+🤖 Arduino & Marlin Firmware
+🖨️ Ultimaker Cura & Pronterface
+🔩 Robotics & Assembly</textarea></div>
+            <button class="a-del" onclick="removeItem(this)">✕ Remove</button>
+          </div>
+          <div class="list-item-box">
+            <div class="field"><label>Group Title</label><input data-sg="title" value="Web Development"></div>
+            <div class="field"><label>Skills (one per line)</label><textarea data-sg="skills">🌐 HTML5 & Semantic Markup
+🎨 CSS3 & Flexbox
+📱 Bootstrap & Responsive Design
+🔗 Grid Layouts & Animations</textarea></div>
+            <button class="a-del" onclick="removeItem(this)">✕ Remove</button>
+          </div>
+          <div class="list-item-box">
+            <div class="field"><label>Group Title</label><input data-sg="title" value="Soft Skills"></div>
+            <div class="field"><label>Skills (one per line)</label><textarea data-sg="skills">👑 Team Leadership
+🧩 Problem Solving
+🗂️ Project Management
+📐 Analysis & Research</textarea></div>
+            <button class="a-del" onclick="removeItem(this)">✕ Remove</button>
+          </div>
+        </div>
+        <button class="a-add" onclick="addSkillGroup()"><i class="fas fa-plus"></i> Add Skill Group</button>
+        <button class="a-save" onclick="saveSkills()">Save Skills</button>
+      </div>
+    </div>
+
+    <!-- TAB: ACHIEVEMENTS -->
+    <div id="tab-ach" class="tab-content">
+      <div class="a-card">
+        <div class="a-card-title">🏅 Achievements</div>
+        <div id="a-ach-list">
+          <div class="list-item-box">
+            <div class="a-row">
+              <div class="field" style="flex:0 0 80px"><label>Icon</label><input data-a="icon" value="🏆"></div>
+              <div class="field"><label>Title</label><input data-a="title" value="3D Printer Project Leader"></div>
+            </div>
+            <div class="field"><label>Description</label><textarea data-a="desc">Led a team of 4 students in successfully designing and building a low-cost 3D printer at SKN Sinhgad COE.</textarea></div>
+            <button class="a-del" onclick="removeItem(this)">✕ Remove</button>
+          </div>
+          <div class="list-item-box">
+            <div class="a-row">
+              <div class="field" style="flex:0 0 80px"><label>Icon</label><input data-a="icon" value="⚡"></div>
+              <div class="field"><label>Title</label><input data-a="title" value="EMotorad EV Internship"></div>
+            </div>
+            <div class="field"><label>Description</label><textarea data-a="desc">Completed a professional internship at a fast-growing EV startup, gaining hands-on manufacturing experience.</textarea></div>
+            <button class="a-del" onclick="removeItem(this)">✕ Remove</button>
+          </div>
+          <div class="list-item-box">
+            <div class="a-row">
+              <div class="field" style="flex:0 0 80px"><label>Icon</label><input data-a="icon" value="🌐"></div>
+              <div class="field"><label>Title</label><input data-a="title" value="Full-Stack Web Projects"></div>
+            </div>
+            <div class="field"><label>Description</label><textarea data-a="desc">Independently built two fully responsive websites using HTML, CSS, and modern layout techniques.</textarea></div>
+            <button class="a-del" onclick="removeItem(this)">✕ Remove</button>
+          </div>
+        </div>
+        <button class="a-add" onclick="addAchievement()"><i class="fas fa-plus"></i> Add Achievement</button>
+        <button class="a-save" onclick="saveAchievements()">Save Achievements</button>
+      </div>
+    </div>
+
+    <!-- TAB: CONTACT -->
+    <div id="tab-contact" class="tab-content">
+      <div class="a-card">
+        <div class="a-card-title">📬 Contact Info</div>
+        <div class="a-row">
+          <div class="field"><label>Phone Number</label><input id="a-cphone" value="+91-9028580906"></div>
+          <div class="field"><label>Primary Email</label><input id="a-email1" value="mohamedbasith.sknscoe.mech77@gmail.com"></div>
+        </div>
+        <div class="a-row">
+          <div class="field"><label>Alternate Email</label><input id="a-email2" value="mohamedbasithmohamedbasith804@gmail.com"></div>
+          <div class="field"><label>LinkedIn URL</label><input id="a-cli" value="https://www.linkedin.com/in/mohamedbasith77/"></div>
+        </div>
+        <div class="field"><label>Contact Intro Text</label><textarea id="a-cintro">I'm currently open to internship opportunities, full-time roles, and interesting project collaborations. Whether you have a question or just want to say hi — my inbox is always open!</textarea></div>
+        <button class="a-save" onclick="saveContact()">Save Contact</button>
+      </div>
+    </div>
+
+    <!-- TAB: FOOTER -->
+    <div id="tab-footer" class="tab-content">
+      <div class="a-card">
+        <div class="a-card-title">🔻 Footer</div>
+        <div class="a-row">
+          <div class="field"><label>Brand Name</label><input id="a-fbrand" value="Mohamed Basith"></div>
+          <div class="field"><label>Tagline</label><input id="a-ftag" value="B.E. Mechanical Engineering · EMotorad Intern"></div>
+        </div>
+        <button class="a-save" onclick="saveFooter()">Save Footer</button>
+      </div>
+    </div>
+
+    <!-- TAB: PASSWORD -->
+    <div id="tab-pass" class="tab-content">
+      <div class="a-card">
+        <div class="a-card-title">🔑 Change Admin Password</div>
+        <div class="field"><label>Current Password</label><input type="password" id="a-pcur"></div>
+        <div class="field"><label>New Password</label><input type="password" id="a-pnew"></div>
+        <div class="field"><label>Confirm New Password</label><input type="password" id="a-pconf"></div>
+        <div id="a-pmsg" style="font-size:.85rem;margin:.5rem 0;display:none"></div>
+        <button class="a-save" onclick="changePass()">Update Password</button>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /admin-panel -->
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+// ═══════════════════════════════════════════════════════════════
+// SUPABASE CONFIG
+// ═══════════════════════════════════════════════════════════════
+const SB_URL = 'https://ojucwkeyeevcaykhmucu.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9qdWN3a2V5ZWV2Y2F5a2htdWN1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxNzMxODIsImV4cCI6MjA5MTc0OTE4Mn0.0ZUDIB3VIESlh83oD9iKdiSBGNu_Usy3e0lUtezXsqQ';
+const sb = supabase.createClient(SB_URL, SB_KEY);
+
+// ═══════════════════════════════════════════════════════════════
+// RUNTIME STATE  (password loaded from DB on boot)
+// ═══════════════════════════════════════════════════════════════
+let PASS = 'Basith@2004';
+const PORT  = document.getElementById('portfolio');
+const ADMIN = document.getElementById('admin-panel');
+
+// ═══════════════════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════════════════
+function toast(msg, isErr) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.borderLeftColor = isErr ? 'var(--rose)' : 'var(--gold)';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+async function dbGet(section) {
+  const { data, error } = await sb.from('portfolio_settings').select('value').eq('id', section).limit(1);
+  if (error) { console.error('dbGet', section, error.message || error); return null; }
+  if (!data || data.length === 0) { console.warn('dbGet: no row found for', section); return null; }
+  return data[0].value;
+}
+
+async function dbSet(section, value) {
+  const { error } = await sb.from('portfolio_settings')
+    .upsert({ id: section, value, updated_at: new Date().toISOString() }, { onConflict: 'id' });
+  if (error) { console.error('dbSet', section, error.message || JSON.stringify(error)); toast('⚠ Save failed: ' + (error.message||'unknown error'), true); return false; }
+  return true;
+}
+
+// ─── DOM helpers ───────────────────────────────────────────────
+const $ = id => document.getElementById(id);
+function txt(id, val)  { const el = $(id); if (el) el.textContent = val ?? ''; }
+function val(id)       { const el = $(id); return el ? el.value : ''; }
+function setVal(id, v) { const el = $(id); if (el) el.value = v ?? ''; }
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER FUNCTIONS  — paint portfolio DOM from data object
+// ═══════════════════════════════════════════════════════════════
+
+function renderHero(h) {
+  txt('p-badge',  h.badge    || '');
+  txt('p-fname',  h.firstName|| '');
+  txt('p-lname',  h.lastName || '');
+  txt('p-role',   h.role     || '');
+  txt('p-desc',   h.desc     || '');
+  txt('p-s1n',    h.stat1Num || '');
+  txt('p-s1l',    h.stat1Label|| '');
+  txt('p-s2n',    h.stat2Num || '');
+  txt('p-s2l',    h.stat2Label|| '');
+  txt('p-s3n',    h.stat3Num || '');
+  txt('p-s3l',    h.stat3Label|| '');
+  // photo
+  const avt = $('p-avatar');
+  if (avt) {
+    if (h.photoUrl) {
+      avt.innerHTML = `<img src="${h.photoUrl}" alt="Profile Photo" style="width:100%;height:100%;object-fit:cover">`;
+    } else {
+      const fn = (h.firstName||'')[0]||'';
+      const ln = ((h.lastName||'').split(' ').pop()||'')[0]||'';
+      avt.innerHTML = `<div class="hero-initials-display" id="p-initials">${fn}${ln}</div>`;
+    }
+  }
+  // links
+  const liBtn = $('p-linkedin-btn');
+  if (liBtn) liBtn.href = h.linkedinUrl || '#';
+  const liLink = $('p-li-link');
+  if (liLink) liLink.href = h.linkedinUrl || '#';
+  const socLi = $('p-soc-li');
+  if (socLi) socLi.href = h.linkedinUrl || '#';
+  const ghBtn = $('p-soc-gh');
+  if (ghBtn) {
+    if (h.githubUrl) { ghBtn.href = h.githubUrl; ghBtn.style.display = 'flex'; }
+    else ghBtn.style.display = 'none';
+  }
+  // resume
+  if ($('a-resume')) setVal('a-resume', h.resumeUrl || '');
+}
+
+function renderAbout(a) {
+  txt('p-fullname', a.fullName || '');
+  txt('p-dob',      a.dob      || '');
+  txt('p-loc',      a.location || '');
+  txt('p-phone',    a.phone    || '');
+  txt('p-gender',   a.gender   || '');
+  txt('p-about1',   a.p1       || '');
+  txt('p-about2',   a.p2       || '');
+  txt('p-about3',   a.p3       || '');
+  const lc = $('p-langs');
+  if (lc) {
+    const langs = Array.isArray(a.languages) ? a.languages : (a.languages||'').split(',').map(x=>x.trim()).filter(Boolean);
+    lc.innerHTML = langs.map(l => `<span class="lang-chip">${l}</span>`).join('');
+  }
+}
+
+function renderContact(c) {
+  txt('p-c-phone',  c.phone  || '');
+  txt('p-c-email1', c.email1 || '');
+  txt('p-c-email2', c.email2 || '');
+  txt('p-contact-intro', c.intro || '');
+  const pl = $('p-phone-link');  if (pl) pl.href = 'tel:' + (c.phone||'').replace(/\s/g,'');
+  const el1 = $('p-email1-link'); if (el1) el1.href = 'mailto:' + (c.email1||'');
+  const el2 = $('p-email2-link'); if (el2) el2.href = 'mailto:' + (c.email2||'');
+  const ll  = $('p-li-link');    if (ll)  ll.href  = c.linkedinUrl || '#';
+}
+
+function renderFooter(f) {
+  txt('p-footer-brand', f.name    || '');
+  txt('p-footer-tag',   f.tagline || '');
+}
+
+function renderEducation(rows) {
+  const list = $('p-edu-list');
+  if (!list) return;
+  list.innerHTML = rows.map(r => `
+    <div class="edu-card">
+      <div class="edu-icon-wrap">${r.icon||'🎓'}</div>
+      <div class="edu-info">
+        <h3>${r.institution}</h3>
+        <p>${r.degree||''}</p>
+        <span class="edu-badge">${r.score||''}</span>
+      </div>
+      <div class="edu-year">${r.year||''}</div>
+    </div>`).join('');
+}
+
+function renderExperience(rows) {
+  const list = $('p-exp-list');
+  if (!list) return;
+  list.innerHTML = rows.map(r => `
+    <div class="exp-card reveal visible">
+      <div class="exp-header">
+        <div class="exp-logo">⚡</div>
+        <div class="exp-meta">
+          <h3>${r.company}</h3>
+          <div class="role">${r.role||''}</div>
+        </div>
+        <div class="exp-duration-badge">${r.duration||''}</div>
+      </div>
+      <p class="exp-desc">${r.description||''}</p>
+      <div class="exp-chips">${(r.skills||[]).map(s=>`<span class="exp-chip">${s}</span>`).join('')}</div>
+    </div>`).join('');
+}
+
+function renderProjects(rows) {
+  const grid = $('p-proj-grid');
+  if (!grid) return;
+  grid.innerHTML = rows.map(r => `
+    <div class="proj-card">
+      <div class="proj-top">
+        <div class="proj-icon">${r.icon||'💡'}</div>
+        ${r.link ? `<a href="${r.link}" target="_blank" class="proj-link"><i class="fas fa-external-link-alt"></i></a>` : ''}
+      </div>
+      <h3>${r.title}</h3>
+      <p>${r.description||''}</p>
+      <div class="proj-chips">${(r.skills||[]).map(s=>`<span class="proj-chip">${s}</span>`).join('')}</div>
+      <div class="proj-footer">
+        <span class="proj-date">${r.date_range||''}</span>
+        <span class="proj-team">${r.team ? '👥 '+r.team : ''}</span>
+      </div>
+    </div>`).join('');
+}
+
+function renderCerts(rows) {
+  const grid = $('p-certs-grid');
+  if (!grid) return;
+  grid.innerHTML = rows.map((r, i) => `
+    <div class="cert-card">
+      <div class="cert-bg-num">0${i+1}</div>
+      <div class="cert-icon">${r.icon||'🏆'}</div>
+      <div class="cert-name">${r.name}</div>
+      <div class="cert-issuer">${r.issuer||''}</div>
+      <div class="cert-date">${r.date_issued||''}</div>
+      ${r.link ? `<a href="${r.link}" target="_blank" class="cert-link-btn"><i class="fas fa-external-link-alt"></i> View</a>` : ''}
+    </div>`).join('');
+}
+
+function renderSkills(rows) {
+  const grid = $('p-skills-grid');
+  if (!grid) return;
+  grid.innerHTML = rows.map(r => {
+    const items = (r.skill_lines||[]).map(line => {
+      const m = line.match(/^(\S+)\s+(.+)$/);
+      const icon = m ? m[1] : '•';
+      const name = m ? m[2] : line;
+      return `<div class="skill-item"><span class="si-icon">${icon}</span><span class="si-name">${name}</span><span class="si-dot"></span></div>`;
+    }).join('');
+    return `<div class="skill-group"><div class="sg-title">${r.group_title}</div>${items}</div>`;
+  }).join('');
+  // reattach cursor hover
+  document.querySelectorAll('.skill-item').forEach(el => {
+    el.addEventListener('mouseenter', () => $('cur')&&$('cur').classList.add('big'));
+    el.addEventListener('mouseleave', () => $('cur')&&$('cur').classList.remove('big'));
+  });
+}
+
+function renderAchievements(rows) {
+  const grid = $('p-ach-grid');
+  if (!grid) return;
+  grid.innerHTML = rows.map(r => `
+    <div class="ach-card">
+      <div class="ach-icon">${r.icon||'🏅'}</div>
+      <div class="ach-info"><h4>${r.title}</h4><p>${r.description||''}</p></div>
+    </div>`).join('');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// POPULATE ADMIN FIELDS from data
+// ═══════════════════════════════════════════════════════════════
+function populateAdminHero(h) {
+  setVal('a-badge',   h.badge||'');
+  setVal('a-fname',   h.firstName||'');
+  setVal('a-lname',   h.lastName||'');
+  setVal('a-role',    h.role||'');
+  setVal('a-desc',    h.desc||'');
+  setVal('a-s1n',     h.stat1Num||'');
+  setVal('a-s1l',     h.stat1Label||'');
+  setVal('a-s2n',     h.stat2Num||'');
+  setVal('a-s2l',     h.stat2Label||'');
+  setVal('a-s3n',     h.stat3Num||'');
+  setVal('a-s3l',     h.stat3Label||'');
+  setVal('a-photo',   h.photoUrl||'');
+  setVal('a-linkedin',h.linkedinUrl||'');
+  setVal('a-resume',  h.resumeUrl||'');
+  setVal('a-github',  h.githubUrl||'');
+}
+
+function populateAdminAbout(a) {
+  setVal('a-fullname', a.fullName||'');
+  setVal('a-dob',      a.dob||'');
+  setVal('a-gender',   a.gender||'');
+  setVal('a-loc',      a.location||'');
+  setVal('a-aphone',   a.phone||'');
+  const langs = Array.isArray(a.languages) ? a.languages : (a.languages||'').split(',').map(x=>x.trim()).filter(Boolean);
+  setVal('a-langs', langs.join(','));
+  setVal('a-p1', a.p1||'');
+  setVal('a-p2', a.p2||'');
+  setVal('a-p3', a.p3||'');
+}
+
+function populateAdminContact(c) {
+  setVal('a-cphone',  c.phone||'');
+  setVal('a-email1',  c.email1||'');
+  setVal('a-email2',  c.email2||'');
+  setVal('a-cli',     c.linkedinUrl||'');
+  setVal('a-cintro',  c.intro||'');
+}
+
+function populateAdminFooter(f) {
+  setVal('a-fbrand', f.name||'');
+  setVal('a-ftag',   f.tagline||'');
+}
+
+function buildListItemBox(fields) {
+  return `<div class="list-item-box">${fields}<button class="a-del" onclick="removeItem(this)">✕ Remove</button></div>`;
+}
+
+function populateAdminEducation(rows) {
+  const list = $('a-edu-list'); if (!list) return;
+  list.innerHTML = rows.map(r => buildListItemBox(`
+    <div class="a-row">
+      <div class="field" style="flex:3"><label>Institution</label><input data-e="inst" value="${esc(r.institution)}"></div>
+      <div class="field" style="flex:0 0 70px"><label>Icon</label><input data-e="icon" value="${esc(r.icon||'🎓')}"></div>
+    </div>
+    <div class="a-row">
+      <div class="field"><label>Degree</label><input data-e="degree" value="${esc(r.degree||'')}"></div>
+      <div class="field" style="flex:0 0 140px"><label>Score</label><input data-e="score" value="${esc(r.score||'')}"></div>
+      <div class="field" style="flex:0 0 120px"><label>Year</label><input data-e="year" value="${esc(r.year||'')}"></div>
+    </div>`)).join('');
+}
+
+function populateAdminExperience(rows) {
+  if (!rows.length) return;
+  const r = rows[0];
+  setVal('a-company', r.company||'');
+  setVal('a-erole',   r.role||'');
+  setVal('a-edur',    r.duration||'');
+  setVal('a-edesc',   r.description||'');
+  setVal('a-eskills', (r.skills||[]).join(','));
+}
+
+function populateAdminProjects(rows) {
+  const list = $('a-proj-list'); if (!list) return;
+  list.innerHTML = rows.map(r => buildListItemBox(`
+    <div class="a-row">
+      <div class="field" style="flex:2"><label>Title</label><input data-p="title" value="${esc(r.title)}"></div>
+      <div class="field" style="flex:0 0 80px"><label>Icon</label><input data-p="icon" value="${esc(r.icon||'💡')}"></div>
+    </div>
+    <div class="field"><label>Description</label><textarea data-p="desc">${esc(r.description||'')}</textarea></div>
+    <div class="a-row">
+      <div class="field"><label>URL</label><input data-p="link" value="${esc(r.link||'')}"></div>
+      <div class="field"><label>Date</label><input data-p="date" value="${esc(r.date_range||'')}"></div>
+      <div class="field" style="flex:0 0 140px"><label>Team</label><input data-p="team" value="${esc(r.team||'')}"></div>
+    </div>
+    <div class="field"><label>Skills</label><input data-p="skills" value="${esc((r.skills||[]).join(','))}"></div>`)).join('');
+}
+
+function populateAdminCerts(rows) {
+  const list = $('a-cert-list'); if (!list) return;
+  list.innerHTML = rows.map(r => buildListItemBox(`
+    <div class="a-row">
+      <div class="field" style="flex:3"><label>Name</label><input data-c="name" value="${esc(r.name)}"></div>
+      <div class="field" style="flex:0 0 70px"><label>Icon</label><input data-c="icon" value="${esc(r.icon||'🏆')}"></div>
+    </div>
+    <div class="a-row">
+      <div class="field"><label>Issuer</label><input data-c="issuer" value="${esc(r.issuer||'')}"></div>
+      <div class="field" style="flex:0 0 140px"><label>Date</label><input data-c="date" value="${esc(r.date_issued||'')}"></div>
+      <div class="field"><label>Link</label><input data-c="link" value="${esc(r.link||'')}"></div>
+    </div>`)).join('');
+}
+
+function populateAdminSkills(rows) {
+  const list = $('a-skills-list'); if (!list) return;
+  list.innerHTML = rows.map(r => buildListItemBox(`
+    <div class="field"><label>Group Title</label><input data-sg="title" value="${esc(r.group_title)}"></div>
+    <div class="field"><label>Skills (one per line: emoji Name)</label><textarea data-sg="skills">${esc((r.skill_lines||[]).join('\n'))}</textarea></div>`)).join('');
+}
+
+function populateAdminAchievements(rows) {
+  const list = $('a-ach-list'); if (!list) return;
+  list.innerHTML = rows.map(r => buildListItemBox(`
+    <div class="a-row">
+      <div class="field" style="flex:0 0 80px"><label>Icon</label><input data-a="icon" value="${esc(r.icon||'🏅')}"></div>
+      <div class="field"><label>Title</label><input data-a="title" value="${esc(r.title)}"></div>
+    </div>
+    <div class="field"><label>Description</label><textarea data-a="desc">${esc(r.description||'')}</textarea></div>`)).join('');
+}
+
+function esc(str) {
+  return (str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// BOOT — load ALL data from Supabase, render portfolio + admin
+// ═══════════════════════════════════════════════════════════════
+async function bootPortfolio() {
+  try {
+    // 1. Fetch all settings in parallel
+    const [hero, about, contact, footer, adminCfg] = await Promise.all([
+      dbGet('hero'), dbGet('about'), dbGet('contact'), dbGet('footer'), dbGet('admin')
+    ]);
+
+    if (hero)    { renderHero(hero);    populateAdminHero(hero); }
+    if (about)   { renderAbout(about);  populateAdminAbout(about); }
+    if (contact) { renderContact(contact); populateAdminContact(contact); }
+    if (footer)  { renderFooter(footer); populateAdminFooter(footer); }
+    if (adminCfg && adminCfg.password) PASS = adminCfg.password;
+
+    // 2. Fetch all list tables in parallel
+    const [
+      { data: edu },
+      { data: exp },
+      { data: proj },
+      { data: certs },
+      { data: skills },
+      { data: ach }
+    ] = await Promise.all([
+      sb.from('portfolio_education').select('*').order('sort_order'),
+      sb.from('portfolio_experience').select('*').order('sort_order'),
+      sb.from('portfolio_projects').select('*').order('sort_order'),
+      sb.from('portfolio_certifications').select('*').order('sort_order'),
+      sb.from('portfolio_skills').select('*').order('sort_order'),
+      sb.from('portfolio_achievements').select('*').order('sort_order')
+    ]);
+
+    if (edu)    { renderEducation(edu);    populateAdminEducation(edu); }
+    if (exp)    { renderExperience(exp);   populateAdminExperience(exp); }
+    if (proj)   { renderProjects(proj);    populateAdminProjects(proj); }
+    if (certs)  { renderCerts(certs);      populateAdminCerts(certs); }
+    if (skills) { renderSkills(skills);    populateAdminSkills(skills); }
+    if (ach)    { renderAchievements(ach); populateAdminAchievements(ach); }
+
+  } catch(e) {
+    console.error('Boot error', e);
+    toast('⚠ Could not load data: ' + e.message, true);
+  }
+
+  // Hide loader
+  setTimeout(() => {
+    const l = $('loader');
+    if (l) { l.style.opacity='0'; l.style.transition='opacity .6s'; setTimeout(()=>l.style.display='none',700); }
+  }, 1500);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CURSOR
+// ═══════════════════════════════════════════════════════════════
+const cur  = $('cur');
+const cur2 = $('cur2');
+let mx=0,my=0,fx=0,fy=0;
+document.addEventListener('mousemove', e => {
+  mx=e.clientX; my=e.clientY;
+  if (cur) cur.style.transform=`translate(${mx-5}px,${my-5}px)`;
+});
+(function animCur(){
+  fx+=(mx-fx)*.13; fy+=(my-fy)*.13;
+  if (cur2) cur2.style.transform=`translate(${fx-19}px,${fy-19}px)`;
+  requestAnimationFrame(animCur);
+})();
+document.querySelectorAll('a,button,.proj-card,.edu-card,.exp-card,.cert-card,.ach-card,.skill-item,.contact-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cur&&cur.classList.add('big'));
+  el.addEventListener('mouseleave',()=>cur&&cur.classList.remove('big'));
+});
+
+// ═══════════════════════════════════════════════════════════════
+// NAV
+// ═══════════════════════════════════════════════════════════════
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('solid', window.scrollY>40);
+});
+function toggleMobile(){
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function closeMobileMenu(){
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SCROLL REVEAL
+// ═══════════════════════════════════════════════════════════════
+const revealObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); revealObs.unobserve(e.target); }});
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+
+// ═══════════════════════════════════════════════════════════════
+// MODAL
+// ═══════════════════════════════════════════════════════════════
+function openModal(id)  { $(id).classList.add('open'); }
+function closeModal(id) { $(id).classList.remove('open'); }
+document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{ if(e.target===o) o.classList.remove('open'); }));
+
+// ═══════════════════════════════════════════════════════════════
+// ADMIN AUTH
+// ═══════════════════════════════════════════════════════════════
+function checkPass(){
+  const v = $('passInput').value;
+  const err = $('passErr');
+  if(v === PASS){ closeModal('passModal'); openAdmin(); }
+  else { err.style.display='block'; $('passInput').value=''; }
+}
+function openAdmin()  { PORT.style.display='none'; ADMIN.classList.add('open'); window.scrollTo(0,0); }
+function exitAdmin()  { ADMIN.classList.remove('open'); PORT.style.display=''; window.scrollTo(0,0); }
+
+// ═══════════════════════════════════════════════════════════════
+// ADMIN TABS
+// ═══════════════════════════════════════════════════════════════
+function switchTab(id, btn){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.atab').forEach(b=>b.classList.remove('active'));
+  $(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// RESUME DOWNLOAD
+// ═══════════════════════════════════════════════════════════════
+async function downloadResume(){
+  // always fetch latest from DB
+  const h = await dbGet('hero');
+  const url = (h && h.resumeUrl) ? h.resumeUrl.trim() : '';
+  if(!url){ alert('Resume URL not set.\nGo to Admin Panel → Hero tab → paste your Google Drive shareable link in "Resume Download URL".'); return false; }
+  window.open(url,'_blank');
+  return false;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// REMOVE ITEM
+// ═══════════════════════════════════════════════════════════════
+function removeItem(btn){ btn.closest('.list-item-box').remove(); }
+
+// ═══════════════════════════════════════════════════════════════
+// ── SAVE FUNCTIONS — save to Supabase then re-render ──────────
+// ═══════════════════════════════════════════════════════════════
+
+async function saveHero(){
+  const h = {
+    badge:      val('a-badge'),
+    firstName:  val('a-fname'),
+    lastName:   val('a-lname'),
+    role:       val('a-role'),
+    desc:       val('a-desc'),
+    stat1Num:   val('a-s1n'),   stat1Label: val('a-s1l'),
+    stat2Num:   val('a-s2n'),   stat2Label: val('a-s2l'),
+    stat3Num:   val('a-s3n'),   stat3Label: val('a-s3l'),
+    photoUrl:   val('a-photo'),
+    linkedinUrl:val('a-linkedin'),
+    resumeUrl:  val('a-resume'),
+    githubUrl:  val('a-github')
+  };
+  const ok = await dbSet('hero', h);
+  if(ok){ renderHero(h); toast('✓ Hero section saved to database'); }
+}
+
+async function saveAbout(){
+  const langs = val('a-langs').split(',').map(l=>l.trim()).filter(Boolean);
+  const a = {
+    fullName: val('a-fullname'), dob:   val('a-dob'),
+    gender:   val('a-gender'),   location: val('a-loc'),
+    phone:    val('a-aphone'),   languages: langs,
+    p1: val('a-p1'), p2: val('a-p2'), p3: val('a-p3')
+  };
+  const ok = await dbSet('about', a);
+  if(ok){ renderAbout(a); toast('✓ About section saved to database'); }
+}
+
+async function saveExp(){
+  // upsert existing row (first row) or insert
+  const skills = val('a-eskills').split(',').map(s=>s.trim()).filter(Boolean);
+  const row = {
+    company:     val('a-company'),
+    role:        val('a-erole'),
+    duration:    val('a-edur'),
+    description: val('a-edesc'),
+    skills,
+    sort_order: 1,
+    updated_at: new Date().toISOString()
+  };
+  const { data: existing } = await sb.from('portfolio_experience').select('id').order('sort_order').limit(1);
+  let error;
+  if(existing && existing.length){
+    ({ error } = await sb.from('portfolio_experience').update(row).eq('id', existing[0].id));
+  } else {
+    ({ error } = await sb.from('portfolio_experience').insert(row));
+  }
+  if(error){ toast('⚠ Save failed: '+error.message, true); return; }
+  renderExperience([row]);
+  toast('✓ Experience saved to database');
+}
+
+async function saveEducation(){
+  const items = document.querySelectorAll('#a-edu-list .list-item-box');
+  // delete all then re-insert
+  await sb.from('portfolio_education').delete().neq('id','00000000-0000-0000-0000-000000000000');
+  const rows = Array.from(items).map((item, i) => ({
+    institution: item.querySelector('[data-e="inst"]')?.value||'',
+    degree:      item.querySelector('[data-e="degree"]')?.value||'',
+    score:       item.querySelector('[data-e="score"]')?.value||'',
+    year:        item.querySelector('[data-e="year"]')?.value||'',
+    icon:        item.querySelector('[data-e="icon"]')?.value||'🎓',
+    sort_order:  i+1
+  }));
+  const { error } = await sb.from('portfolio_education').insert(rows);
+  if(error){ toast('⚠ Save failed: '+error.message, true); return; }
+  renderEducation(rows);
+  toast('✓ Education saved to database');
+}
+
+async function saveProjects(){
+  const items = document.querySelectorAll('#a-proj-list .list-item-box');
+  await sb.from('portfolio_projects').delete().neq('id','00000000-0000-0000-0000-000000000000');
+  const rows = Array.from(items).map((item, i) => ({
+    title:       item.querySelector('[data-p="title"]')?.value||'',
+    icon:        item.querySelector('[data-p="icon"]')?.value||'💡',
+    description: item.querySelector('[data-p="desc"]')?.value||'',
+    link:        item.querySelector('[data-p="link"]')?.value||'',
+    date_range:  item.querySelector('[data-p="date"]')?.value||'',
+    team:        item.querySelector('[data-p="team"]')?.value||'',
+    skills:      (item.querySelector('[data-p="skills"]')?.value||'').split(',').map(s=>s.trim()).filter(Boolean),
+    sort_order:  i+1
+  }));
+  const { error } = await sb.from('portfolio_projects').insert(rows);
+  if(error){ toast('⚠ Save failed: '+error.message, true); return; }
+  renderProjects(rows);
+  toast('✓ Projects saved to database');
+}
+
+async function saveCerts(){
+  const items = document.querySelectorAll('#a-cert-list .list-item-box');
+  await sb.from('portfolio_certifications').delete().neq('id','00000000-0000-0000-0000-000000000000');
+  const rows = Array.from(items).map((item, i) => ({
+    name:        item.querySelector('[data-c="name"]')?.value||'',
+    icon:        item.querySelector('[data-c="icon"]')?.value||'🏆',
+    issuer:      item.querySelector('[data-c="issuer"]')?.value||'',
+    date_issued: item.querySelector('[data-c="date"]')?.value||'',
+    link:        item.querySelector('[data-c="link"]')?.value||'',
+    sort_order:  i+1
+  }));
+  const { error } = await sb.from('portfolio_certifications').insert(rows);
+  if(error){ toast('⚠ Save failed: '+error.message, true); return; }
+  renderCerts(rows);
+  toast('✓ Certifications saved to database');
+}
+
+async function saveSkills(){
+  const items = document.querySelectorAll('#a-skills-list .list-item-box');
+  await sb.from('portfolio_skills').delete().neq('id','00000000-0000-0000-0000-000000000000');
+  const rows = Array.from(items).map((item, i) => ({
+    group_title: item.querySelector('[data-sg="title"]')?.value||'',
+    skill_lines: (item.querySelector('[data-sg="skills"]')?.value||'').split('\n').map(l=>l.trim()).filter(Boolean),
+    sort_order:  i+1
+  }));
+  const { error } = await sb.from('portfolio_skills').insert(rows);
+  if(error){ toast('⚠ Save failed: '+error.message, true); return; }
+  renderSkills(rows);
+  toast('✓ Skills saved to database');
+}
+
+async function saveAchievements(){
+  const items = document.querySelectorAll('#a-ach-list .list-item-box');
+  await sb.from('portfolio_achievements').delete().neq('id','00000000-0000-0000-0000-000000000000');
+  const rows = Array.from(items).map((item, i) => ({
+    icon:        item.querySelector('[data-a="icon"]')?.value||'🏅',
+    title:       item.querySelector('[data-a="title"]')?.value||'',
+    description: item.querySelector('[data-a="desc"]')?.value||'',
+    sort_order:  i+1
+  }));
+  const { error } = await sb.from('portfolio_achievements').insert(rows);
+  if(error){ toast('⚠ Save failed: '+error.message, true); return; }
+  renderAchievements(rows);
+  toast('✓ Achievements saved to database');
+}
+
+async function saveContact(){
+  const c = {
+    phone:       val('a-cphone'),
+    email1:      val('a-email1'),
+    email2:      val('a-email2'),
+    linkedinUrl: val('a-cli'),
+    intro:       val('a-cintro')
+  };
+  const ok = await dbSet('contact', c);
+  if(ok){ renderContact(c); toast('✓ Contact info saved to database'); }
+}
+
+async function saveFooter(){
+  const f = { name: val('a-fbrand'), tagline: val('a-ftag') };
+  const ok = await dbSet('footer', f);
+  if(ok){ renderFooter(f); toast('✓ Footer saved to database'); }
+}
+
+async function changePass(){
+  const cur  = $('a-pcur').value;
+  const nw   = $('a-pnew').value;
+  const cf   = $('a-pconf').value;
+  const msg  = $('a-pmsg');
+  msg.style.display='block';
+  if(cur !== PASS){ msg.style.color='var(--rose)'; msg.textContent='⚠ Current password is incorrect.'; return; }
+  if(nw.length < 6){ msg.style.color='var(--rose)'; msg.textContent='⚠ Password must be at least 6 characters.'; return; }
+  if(nw !== cf){ msg.style.color='var(--rose)'; msg.textContent='⚠ Passwords do not match.'; return; }
+  const ok = await dbSet('admin', { password: nw });
+  if(ok){
+    PASS = nw;
+    msg.style.color='var(--teal)'; msg.textContent='✓ Password changed and saved!';
+    $('a-pcur').value=''; $('a-pnew').value=''; $('a-pconf').value='';
+    setTimeout(()=>msg.style.display='none',3000);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ADD ITEM HELPERS
+// ═══════════════════════════════════════════════════════════════
+function addProject(){
+  $('a-proj-list').insertAdjacentHTML('beforeend',buildListItemBox(`
+    <div class="a-row">
+      <div class="field" style="flex:2"><label>Title</label><input data-p="title" placeholder="Project title"></div>
+      <div class="field" style="flex:0 0 80px"><label>Icon</label><input data-p="icon" placeholder="💡"></div>
+    </div>
+    <div class="field"><label>Description</label><textarea data-p="desc" placeholder="Project description..."></textarea></div>
+    <div class="a-row">
+      <div class="field"><label>URL</label><input data-p="link" placeholder="https://..."></div>
+      <div class="field"><label>Date</label><input data-p="date" placeholder="Jan 2025 – Mar 2025"></div>
+      <div class="field" style="flex:0 0 140px"><label>Team</label><input data-p="team" placeholder="Solo"></div>
+    </div>
+    <div class="field"><label>Skills</label><input data-p="skills" placeholder="HTML,CSS,JavaScript"></div>`));
+}
+function addCert(){
+  $('a-cert-list').insertAdjacentHTML('beforeend',buildListItemBox(`
+    <div class="a-row">
+      <div class="field" style="flex:3"><label>Name</label><input data-c="name" placeholder="Certificate name"></div>
+      <div class="field" style="flex:0 0 70px"><label>Icon</label><input data-c="icon" placeholder="🏆"></div>
+    </div>
+    <div class="a-row">
+      <div class="field"><label>Issuer</label><input data-c="issuer" placeholder="Organization"></div>
+      <div class="field" style="flex:0 0 140px"><label>Date</label><input data-c="date" placeholder="Jan 2025"></div>
+      <div class="field"><label>Link</label><input data-c="link" placeholder="https://..."></div>
+    </div>`));
+}
+function addEducation(){
+  $('a-edu-list').insertAdjacentHTML('beforeend',buildListItemBox(`
+    <div class="a-row">
+      <div class="field" style="flex:3"><label>Institution</label><input data-e="inst" placeholder="Institution name"></div>
+      <div class="field" style="flex:0 0 70px"><label>Icon</label><input data-e="icon" placeholder="🎓"></div>
+    </div>
+    <div class="a-row">
+      <div class="field"><label>Degree</label><input data-e="degree" placeholder="e.g. B.E. Mechanical"></div>
+      <div class="field" style="flex:0 0 140px"><label>Score</label><input data-e="score" placeholder="e.g. 7.5/10"></div>
+      <div class="field" style="flex:0 0 120px"><label>Year</label><input data-e="year" placeholder="2020–2024"></div>
+    </div>`));
+}
+function addSkillGroup(){
+  $('a-skills-list').insertAdjacentHTML('beforeend',buildListItemBox(`
+    <div class="field"><label>Group Title</label><input data-sg="title" placeholder="e.g. New Skills"></div>
+    <div class="field"><label>Skills (one per line: emoji Name)</label><textarea data-sg="skills" placeholder="⭐ Skill Name"></textarea></div>`));
+}
+function addAchievement(){
+  $('a-ach-list').insertAdjacentHTML('beforeend',buildListItemBox(`
+    <div class="a-row">
+      <div class="field" style="flex:0 0 80px"><label>Icon</label><input data-a="icon" placeholder="🏅"></div>
+      <div class="field"><label>Title</label><input data-a="title" placeholder="Achievement title"></div>
+    </div>
+    <div class="field"><label>Description</label><textarea data-a="desc" placeholder="Describe this achievement..."></textarea></div>`));
+}
+
+// ═══════════════════════════════════════════════════════════════
+// YEAR + BOOT
+// ═══════════════════════════════════════════════════════════════
+$('p-year').textContent = new Date().getFullYear();
+bootPortfolio();
+
+// ═══════════════════════════════════════════════════════════════
+// ADVANCED FEATURE 1 — Scroll Progress Bar
+// ═══════════════════════════════════════════════════════════════
+(function() {
+  const bar = $('scroll-progress');
+  if (!bar) return;
+  window.addEventListener('scroll', () => {
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = total > 0 ? (window.scrollY / total) * 100 : 0;
+    bar.style.width = pct + '%';
+  }, { passive: true });
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// ADVANCED FEATURE 2 — Back to Top Button
+// ═══════════════════════════════════════════════════════════════
+(function() {
+  const btn = $('btt');
+  if (!btn) return;
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('show', window.scrollY > 500);
+  }, { passive: true });
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// ADVANCED FEATURE 3 — Typewriter on Hero Badge
+// ═══════════════════════════════════════════════════════════════
+(function() {
+  function startTyped(el, words) {
+    if (!el) return;
+    const cursor = document.createElement('span');
+    cursor.className = 'typed-cursor';
+    el.after(cursor);
+    let wi = 0, ci = 0, deleting = false;
+    function tick() {
+      const word = words[wi % words.length];
+      if (!deleting) {
+        el.textContent = word.slice(0, ++ci);
+        if (ci === word.length) { deleting = true; setTimeout(tick, 1800); return; }
+        setTimeout(tick, 95);
+      } else {
+        el.textContent = word.slice(0, --ci);
+        if (ci === 0) { deleting = false; wi++; setTimeout(tick, 350); return; }
+        setTimeout(tick, 52);
+      }
+    }
+    // Wait for boot to populate then start
+    setTimeout(tick, 2400);
+  }
+  startTyped($('p-badge'), [
+    'Available for Opportunities',
+    'Mechanical Engineer',
+    'EV Manufacturing Intern',
+    'Open to Collaborate'
+  ]);
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// ADVANCED FEATURE 4 — Skill Bar Animations on Scroll
+// ═══════════════════════════════════════════════════════════════
+(function() {
+  const levels = { 0: 90, 1: 85, 2: 80, 3: 75, 4: 88 };
+  function attachBars() {
+    document.querySelectorAll('.skill-item').forEach((el, i) => {
+      if (el.querySelector('.skill-bar')) return;
+      const bar = document.createElement('div');
+      bar.className = 'skill-bar';
+      el.appendChild(bar);
+    });
+    const barObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const bars = e.target.querySelectorAll('.skill-bar');
+        bars.forEach((b, i) => {
+          setTimeout(() => { b.style.width = (levels[i] || 78) + '%'; }, i * 120);
+        });
+        barObs.unobserve(e.target);
+      });
+    }, { threshold: 0.3 });
+    const sg = document.querySelector('.skills-grid');
+    if (sg) barObs.observe(sg);
+  }
+  // Run after boot renders skills
+  setTimeout(attachBars, 2800);
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// ADVANCED FEATURE 5 — Active Nav Highlight on Scroll
+// ═══════════════════════════════════════════════════════════════
+(function() {
+  const sections = ['hero','about','education','experience','projects','skills','certifications','achievements','contact'];
+  const links = document.querySelectorAll('.nav-links a, .mobile-menu a');
+  function onScroll() {
+    let current = 'hero';
+    for (const id of sections) {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 120) current = id;
+    }
+    links.forEach(a => {
+      const href = a.getAttribute('href') || '';
+      a.classList.toggle('nav-active', href === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// ADVANCED FEATURE 6 — Section Number Watermarks
+// ═══════════════════════════════════════════════════════════════
+(function() {
+  const nums = { about:'01', education:'02', experience:'03', projects:'04', skills:'05', certifications:'06', achievements:'07', contact:'08' };
+  Object.entries(nums).forEach(([id, num]) => {
+    const sec = document.getElementById(id);
+    if (!sec) return;
+    if (getComputedStyle(sec).position === 'static') sec.style.position = 'relative';
+    const d = document.createElement('div');
+    d.className = 'sec-num';
+    d.textContent = num;
+    sec.appendChild(d);
+  });
+})();
+</script>
+</body>
+</html>
