@@ -537,11 +537,11 @@ footer{background:rgba(10,8,6,1);padding:2rem 5%;border-top:1px solid rgba(255,2
         <div class="hero-frame"></div>
         <div class="hero-tag ht1">
           <div class="hero-tag-icon" style="background:#fff8ed">⚡</div>
-          <div><div style="font-size:.7rem;color:var(--ink3)">Current Role</div><div style="font-size:.82rem;font-weight:600">EV Manufacturing</div></div>
+          <div><div style="font-size:.7rem;color:var(--ink3)" id="p-tag1-label">Current Role</div><div style="font-size:.82rem;font-weight:600" id="p-tag1-value">EV Manufacturing</div></div>
         </div>
         <div class="hero-tag ht2">
           <div class="hero-tag-icon" style="background:#f0faf8">🎓</div>
-          <div><div style="font-size:.7rem;color:var(--ink3)">Graduating</div><div style="font-size:.82rem;font-weight:600">2026</div></div>
+          <div><div style="font-size:.7rem;color:var(--ink3)" id="p-tag2-label">Graduating</div><div style="font-size:.82rem;font-weight:600" id="p-tag2-value">2026</div></div>
         </div>
       </div>
     </div>
@@ -930,6 +930,14 @@ footer{background:rgba(10,8,6,1);padding:2rem 5%;border-top:1px solid rgba(255,2
           <div class="field"><label>Resume Download URL</label><input id="a-resume" placeholder="Google Drive shareable link"></div>
         </div>
         <div class="field"><label>GitHub URL (leave blank to hide)</label><input id="a-github" placeholder="https://github.com/..."></div>
+        <div class="a-row">
+          <div class="field"><label>Photo Tag 1 — Label</label><input id="a-tag1label" value="Current Role"></div>
+          <div class="field"><label>Photo Tag 1 — Value</label><input id="a-tag1value" value="EV Manufacturing"></div>
+        </div>
+        <div class="a-row">
+          <div class="field"><label>Photo Tag 2 — Label</label><input id="a-tag2label" value="Graduating"></div>
+          <div class="field"><label>Photo Tag 2 — Value</label><input id="a-tag2value" value="2026"></div>
+        </div>
         <button class="a-save" onclick="saveHero()">Save Hero Section</button>
       </div>
     </div>
@@ -1313,6 +1321,10 @@ function renderHero(h) {
   txt('p-s2l',    h.stat2Label|| '');
   txt('p-s3n',    h.stat3Num || '');
   txt('p-s3l',    h.stat3Label|| '');
+  txt('p-tag1-label', h.tag1Label !== undefined ? h.tag1Label : 'Current Role');
+  txt('p-tag1-value', h.tag1Value !== undefined ? h.tag1Value : 'EV Manufacturing');
+  txt('p-tag2-label', h.tag2Label !== undefined ? h.tag2Label : 'Graduating');
+  txt('p-tag2-value', h.tag2Value !== undefined ? h.tag2Value : '2026');
   // photo
   const avt = $('p-avatar');
   if (avt) {
@@ -1482,6 +1494,10 @@ function populateAdminHero(h) {
   setVal('a-s2l',     h.stat2Label||'');
   setVal('a-s3n',     h.stat3Num||'');
   setVal('a-s3l',     h.stat3Label||'');
+  setVal('a-tag1label', h.tag1Label !== undefined ? h.tag1Label : 'Current Role');
+  setVal('a-tag1value', h.tag1Value !== undefined ? h.tag1Value : 'EV Manufacturing');
+  setVal('a-tag2label', h.tag2Label !== undefined ? h.tag2Label : 'Graduating');
+  setVal('a-tag2value', h.tag2Value !== undefined ? h.tag2Value : '2026');
   setVal('a-photo',   h.photoUrl||'');
   setVal('a-linkedin',h.linkedinUrl||'');
   setVal('a-resume',  h.resumeUrl||'');
@@ -1818,6 +1834,8 @@ async function saveHero(){
     stat1Num:   val('a-s1n'),   stat1Label: val('a-s1l'),
     stat2Num:   val('a-s2n'),   stat2Label: val('a-s2l'),
     stat3Num:   val('a-s3n'),   stat3Label: val('a-s3l'),
+    tag1Label:  val('a-tag1label'), tag1Value: val('a-tag1value'),
+    tag2Label:  val('a-tag2label'), tag2Value: val('a-tag2value'),
     photoUrl:   val('a-photo'),
     linkedinUrl:val('a-linkedin'),
     resumeUrl:  val('a-resume'),
