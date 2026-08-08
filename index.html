@@ -19,11 +19,20 @@
   --sky:#2855a0;--sky2:#3d70cf;--sky3:#dce8fc;
   --white:#ffffff;--shadow:rgba(26,22,18,0.08);
   --shadow2:rgba(26,22,18,0.18);
+  --on-gold:#ffffff;
   --ff-display:'Cormorant Garamond',serif;
   --ff-body:'Outfit',sans-serif;
   --ff-accent:'Space Grotesk',sans-serif;
   --nav-h:72px;
 }
+/* ═══ DARK THEME (same palette, inverted surfaces) ═══ */
+html[data-theme="dark"]{
+  --cream:#161310;--cream2:#1c1815;--cream3:#26211c;
+  --ink:#f2ede4;--ink2:#d6cdc0;--ink3:#a89c8c;
+  --white:#201b16;
+  --shadow:rgba(0,0,0,.35);--shadow2:rgba(0,0,0,.55);
+}
+html[data-theme="dark"] body{background:var(--cream)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:16px}
 body{background:var(--cream);color:var(--ink);font-family:var(--ff-body);overflow-x:hidden;cursor:none}
@@ -59,15 +68,29 @@ nav.solid{background:rgba(250,247,242,.95);backdrop-filter:blur(20px);box-shadow
 .nav-cta{display:flex;gap:.8rem;align-items:center;margin-left:2rem}
 .nav-admin-btn{background:transparent;border:1px solid var(--cream3);color:var(--ink3);padding:.45rem 1rem;border-radius:50px;font-size:.8rem;cursor:pointer;transition:all .3s;font-family:var(--ff-body);display:flex;align-items:center;gap:.4rem}
 .nav-admin-btn:hover{border-color:var(--gold);color:var(--gold)}
+.theme-toggle{background:transparent;border:1px solid var(--cream3);color:var(--ink3);width:36px;height:36px;border-radius:50%;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;font-size:.85rem}
+.theme-toggle:hover{border-color:var(--gold);color:var(--gold);transform:rotate(20deg)}
+.mobile-theme-toggle{display:flex;align-items:center;gap:.6rem;font-family:var(--ff-accent);font-size:.9rem;text-transform:uppercase;letter-spacing:.5px;color:var(--ink2);padding:.9rem 0;cursor:pointer;background:none;border:none;text-align:left;width:100%}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;margin-left:1.5rem}
 .hamburger span{width:22px;height:2px;background:var(--ink2);border-radius:2px;transition:.3s}
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(250,247,242,.98);backdrop-filter:blur(24px);border-bottom:1px solid var(--cream3);flex-direction:column;padding:1.5rem 5%;gap:0;z-index:999}
-.mobile-menu.open{display:flex}
-.mobile-menu a{font-family:var(--ff-accent);font-size:.9rem;text-transform:uppercase;letter-spacing:.5px;color:var(--ink2);padding:.9rem 0;border-bottom:1px solid var(--cream3);transition:color .3s}
+.mobile-menu{display:flex;position:fixed;top:var(--nav-h);left:0;right:0;background:var(--cream);opacity:.98;backdrop-filter:blur(24px);border-bottom:1px solid var(--cream3);flex-direction:column;padding:1.5rem 5%;gap:0;z-index:999;max-height:0;overflow:hidden;opacity:0;transform:translateY(-8px);transition:max-height .4s cubic-bezier(.4,0,.2,1),opacity .3s ease,transform .35s ease;pointer-events:none}
+.mobile-menu.open{max-height:80vh;opacity:.98;transform:translateY(0);pointer-events:auto}
+.mobile-menu a{font-family:var(--ff-accent);font-size:.9rem;text-transform:uppercase;letter-spacing:.5px;color:var(--ink2);padding:.9rem 0;border-bottom:1px solid var(--cream3);transition:color .3s,transform .3s;opacity:0;transform:translateX(-10px)}
+.mobile-menu.open a{opacity:1;transform:translateX(0)}
+.mobile-menu.open a:nth-child(1){transition-delay:.05s}
+.mobile-menu.open a:nth-child(2){transition-delay:.09s}
+.mobile-menu.open a:nth-child(3){transition-delay:.13s}
+.mobile-menu.open a:nth-child(4){transition-delay:.17s}
+.mobile-menu.open a:nth-child(5){transition-delay:.21s}
+.mobile-menu.open a:nth-child(6){transition-delay:.25s}
+.mobile-menu.open a:nth-child(7){transition-delay:.29s}
+.mobile-menu.open a:nth-child(8){transition-delay:.33s}
 .mobile-menu a:hover{color:var(--gold)}
+.nav-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .35s ease;z-index:998}
+.nav-backdrop.open{opacity:1;pointer-events:auto}
 
 /* ═══ HERO ═══════════════════════════════════ */
 #hero{min-height:100vh;display:flex;align-items:center;padding:calc(var(--nav-h) + 3rem) 5% 5rem;position:relative;overflow:hidden;background:var(--cream)}
@@ -85,7 +108,7 @@ nav.solid{background:rgba(250,247,242,.95);backdrop-filter:blur(20px);box-shadow
 .hero-role{font-family:var(--ff-accent);font-size:clamp(.95rem,2vw,1.1rem);font-weight:400;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);margin:1.2rem 0 1.5rem;opacity:0;animation:fadeUp .7s .5s ease forwards}
 .hero-desc{font-size:1rem;line-height:1.85;color:var(--ink2);max-width:500px;margin-bottom:2.5rem;opacity:0;animation:fadeUp .7s .65s ease forwards}
 .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp .7s .8s ease forwards}
-.btn-gold{background:var(--gold);color:var(--white);border:none;padding:.9rem 2rem;border-radius:4px;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .3s;font-family:var(--ff-body);text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;letter-spacing:.3px}
+.btn-gold{background:var(--gold);color:var(--on-gold);border:none;padding:.9rem 2rem;border-radius:4px;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .3s;font-family:var(--ff-body);text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;letter-spacing:.3px}
 .btn-gold:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,151,58,.3)}
 .btn-outline{background:transparent;border:1.5px solid var(--ink2);color:var(--ink2);padding:.88rem 2rem;border-radius:4px;font-size:.9rem;font-weight:500;cursor:pointer;transition:all .3s;font-family:var(--ff-body);text-decoration:none;display:inline-flex;align-items:center;gap:.5rem}
 .btn-outline:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
@@ -240,6 +263,18 @@ section{padding:7rem 5%;position:relative}
 .ci-val{font-size:.88rem;color:rgba(255,255,255,.85);margin-top:2px}
 .ci-arrow{margin-left:auto;color:rgba(255,255,255,.2);font-size:.8rem;transition:transform .3s}
 .contact-item:hover .ci-arrow{transform:translateX(3px);color:var(--gold)}
+.contact-form-wrap{flex:1;min-width:280px}
+.cf-field{margin-bottom:1.1rem}
+.cf-field label{display:block;font-family:var(--ff-accent);font-size:.72rem;text-transform:uppercase;letter-spacing:.6px;color:rgba(255,255,255,.5);margin-bottom:.5rem}
+.cf-field input,.cf-field textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:.85rem 1rem;color:var(--cream);font-family:var(--ff-body);font-size:.92rem;transition:all .3s;resize:vertical}
+.cf-field textarea{min-height:110px}
+.cf-field input:focus,.cf-field textarea:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,.07)}
+.cf-field input::placeholder,.cf-field textarea::placeholder{color:rgba(255,255,255,.3)}
+.cf-submit{width:100%;justify-content:center;border:none}
+.cf-submit:disabled{opacity:.6;cursor:not-allowed}
+.cf-status{margin-top:.8rem;font-size:.85rem;text-align:center;min-height:1.2em}
+.cf-status.ok{color:var(--teal2)}
+.cf-status.err{color:var(--rose2)}
 .social-links{display:flex;gap:.8rem;margin-top:2rem}
 .social-btn{width:46px;height:46px;border-radius:9px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);text-decoration:none;font-size:1rem;transition:all .3s}
 .social-btn:hover{background:rgba(201,151,58,.12);border-color:rgba(201,151,58,.25);color:var(--gold);transform:translateY(-3px)}
@@ -266,7 +301,7 @@ footer{background:rgba(10,8,6,1);padding:2rem 5%;border-top:1px solid rgba(255,2
 .modal-actions{display:flex;gap:.8rem;margin-top:1.2rem}
 .btn-cancel{flex:1;background:var(--cream);border:1px solid var(--cream3);color:var(--ink2);padding:.8rem;border-radius:6px;cursor:pointer;font-family:var(--ff-body);transition:all .3s}
 .btn-cancel:hover{border-color:var(--rose);color:var(--rose)}
-.btn-confirm{flex:1;background:var(--gold);border:none;color:var(--white);padding:.8rem;border-radius:6px;cursor:pointer;font-family:var(--ff-body);font-weight:600;transition:all .3s}
+.btn-confirm{flex:1;background:var(--gold);border:none;color:var(--on-gold);padding:.8rem;border-radius:6px;cursor:pointer;font-family:var(--ff-body);font-weight:600;transition:all .3s}
 .btn-confirm:hover{background:var(--gold2)}
 
 /* ═══ ADMIN PANEL ════════════════════════════ */
@@ -280,7 +315,7 @@ footer{background:rgba(10,8,6,1);padding:2rem 5%;border-top:1px solid rgba(255,2
 .admin-wrap{max-width:1140px;margin:0 auto;padding:2rem 5% 4rem}
 .admin-tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:2rem;background:var(--white);border:1px solid var(--cream3);border-radius:8px;padding:.5rem}
 .atab{padding:.5rem 1.1rem;border-radius:5px;font-size:.82rem;font-family:var(--ff-accent);font-weight:500;cursor:pointer;color:var(--ink3);transition:all .3s;border:none;background:transparent;letter-spacing:.3px}
-.atab.active{background:var(--gold);color:var(--white)}
+.atab.active{background:var(--gold);color:var(--on-gold)}
 .atab:hover:not(.active){color:var(--ink)}
 .tab-content{display:none}
 .tab-content.active{display:block}
@@ -288,7 +323,7 @@ footer{background:rgba(10,8,6,1);padding:2rem 5%;border-top:1px solid rgba(255,2
 .a-card-title{font-family:var(--ff-display);font-size:1.1rem;font-weight:600;color:var(--ink);margin-bottom:1.2rem;display:flex;align-items:center;gap:.5rem;padding-bottom:.8rem;border-bottom:1px solid var(--cream3)}
 .a-row{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:.2rem}
 .a-row .field{flex:1;min-width:200px;margin-bottom:0}
-.a-save{background:var(--gold);border:none;color:var(--white);padding:.7rem 1.5rem;border-radius:6px;cursor:pointer;font-family:var(--ff-body);font-weight:600;font-size:.88rem;transition:all .3s;margin-top:.8rem}
+.a-save{background:var(--gold);border:none;color:var(--on-gold);padding:.7rem 1.5rem;border-radius:6px;cursor:pointer;font-family:var(--ff-body);font-weight:600;font-size:.88rem;transition:all .3s;margin-top:.8rem}
 .a-save:hover{background:var(--gold2);transform:translateY(-1px)}
 .a-add{background:var(--teal3);border:1px solid rgba(58,157,142,.25);color:var(--teal);padding:.55rem 1.1rem;border-radius:6px;cursor:pointer;font-family:var(--ff-body);font-size:.85rem;transition:all .3s;display:inline-flex;align-items:center;gap:.4rem;margin-top:.5rem}
 .a-add:hover{background:rgba(58,157,142,.15)}
@@ -322,12 +357,28 @@ footer{background:rgba(10,8,6,1);padding:2rem 5%;border-top:1px solid rgba(255,2
   .edu-card{flex-direction:column;gap:1rem}
   .edu-year{margin-left:0}
 }
+/* ═══ SMALL PHONES ═══════════════════════════ */
+@media(max-width:480px){
+  html{font-size:14.5px}
+  section{padding:3.5rem 6%}
+  .hero-name{font-size:2.6rem!important}
+  .hero-btns{flex-direction:column;width:100%}
+  .hero-btns a{width:100%;justify-content:center}
+  .hero-stats{gap:1.2rem;flex-wrap:wrap}
+  .hero-img-bg{width:170px;height:210px}
+  .section-title{font-size:2rem!important}
+  .contact-wrapper{gap:2.5rem}
+  .btn-gold,.btn-outline{width:100%;justify-content:center;padding:.85rem 1.4rem}
+  .admin-bar{padding:1rem 5%}
+  .a-card{padding:1.2rem}
+  #btt{width:38px;height:38px;bottom:1.2rem;right:1.2rem;font-size:.85rem}
+}
 </style>
 
 <!-- ═══ ADVANCED FEATURES CSS ═══ -->
 <style>
 /* ── BACK TO TOP BUTTON ──────────────────── */
-#btt{position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;border-radius:50%;background:var(--gold);border:none;color:var(--white);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:500;opacity:0;transform:translateY(12px);transition:all .35s;box-shadow:0 4px 16px rgba(201,151,58,.35)}
+#btt{position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;border-radius:50%;background:var(--gold);border:none;color:var(--on-gold);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:500;opacity:0;transform:translateY(12px);transition:all .35s;box-shadow:0 4px 16px rgba(201,151,58,.35)}
 #btt.show{opacity:1;transform:translateY(0)}
 #btt:hover{background:var(--gold2);transform:translateY(-3px);box-shadow:0 8px 24px rgba(201,151,58,.45)}
 
@@ -421,6 +472,7 @@ footer{background:rgba(10,8,6,1);padding:2rem 5%;border-top:1px solid rgba(255,2
     <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
   </ul>
   <div class="nav-cta">
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle dark mode"><i class="fas fa-moon" id="themeIcon"></i></button>
     <button class="nav-admin-btn" onclick="openModal('passModal')"><i class="fas fa-lock"></i> Admin</button>
   </div>
   <div class="hamburger" id="hamburger" onclick="toggleMobile()">
@@ -436,7 +488,9 @@ footer{background:rgba(10,8,6,1);padding:2rem 5%;border-top:1px solid rgba(255,2
   <a href="#certifications" onclick="closeMobileMenu()">Certifications</a>
   <a href="#achievements" onclick="closeMobileMenu()">Achievements</a>
   <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+  <button class="mobile-theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon" id="themeIconMobile"></i> <span id="themeLabelMobile">Dark Mode</span></button>
 </div>
+<div class="nav-backdrop" id="navBackdrop" onclick="closeMobileMenu()"></div>
 
 <!-- ══════════════════════════════════════════
      MAIN PORTFOLIO
@@ -779,6 +833,24 @@ footer{background:rgba(10,8,6,1);padding:2rem 5%;border-top:1px solid rgba(255,2
           <a class="social-btn" href="tel:+919028580906"><i class="fas fa-phone"></i></a>
           <a class="social-btn" id="p-soc-gh" href="#" style="display:none"><i class="fab fa-github"></i></a>
         </div>
+      </div>
+      <div class="contact-form-wrap reveal">
+        <form id="contactForm" onsubmit="return sendContactForm(event)">
+          <div class="cf-field">
+            <label for="cf-name">Name</label>
+            <input type="text" id="cf-name" required placeholder="Your name">
+          </div>
+          <div class="cf-field">
+            <label for="cf-email">Email</label>
+            <input type="email" id="cf-email" required placeholder="you@example.com">
+          </div>
+          <div class="cf-field">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" required placeholder="What's on your mind?"></textarea>
+          </div>
+          <button type="submit" class="btn-gold cf-submit" id="cfSubmitBtn"><i class="fas fa-paper-plane"></i> Send Message</button>
+          <div class="cf-status" id="cfStatus"></div>
+        </form>
       </div>
     </div>
   </div>
@@ -1165,7 +1237,18 @@ footer{background:rgba(10,8,6,1);padding:2rem 5%;border-top:1px solid rgba(255,2
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
+// ═══════════════════════════════════════════════════════════════
+// EMAILJS CONFIG — contact form only, NOT connected to Supabase.
+// Create a free account at emailjs.com, then fill in these 3 values.
+// Leave EMAILJS_PUBLIC_KEY empty ('') to keep the form disabled safely.
+// ═══════════════════════════════════════════════════════════════
+const EMAILJS_PUBLIC_KEY  = '';   // e.g. 'AbCdEfGhIjKlMnOp'
+const EMAILJS_SERVICE_ID  = '';   // e.g. 'service_xxxxxxx'
+const EMAILJS_TEMPLATE_ID = '';   // e.g. 'template_xxxxxxx'
+if (EMAILJS_PUBLIC_KEY && window.emailjs) emailjs.init(EMAILJS_PUBLIC_KEY);
+
 // ═══════════════════════════════════════════════════════════════
 // SUPABASE CONFIG
 // ═══════════════════════════════════════════════════════════════
@@ -1536,479 +1619,4 @@ async function bootPortfolio() {
       sb.from('portfolio_experience').select('*').order('sort_order'),
       sb.from('portfolio_projects').select('*').order('sort_order'),
       sb.from('portfolio_certifications').select('*').order('sort_order'),
-      sb.from('portfolio_skills').select('*').order('sort_order'),
-      sb.from('portfolio_achievements').select('*').order('sort_order')
-    ]);
-
-    if (edu)    { renderEducation(edu);    populateAdminEducation(edu); }
-    if (exp)    { renderExperience(exp);   populateAdminExperience(exp); }
-    if (proj)   { renderProjects(proj);    populateAdminProjects(proj); }
-    if (certs)  { renderCerts(certs);      populateAdminCerts(certs); }
-    if (skills) { renderSkills(skills);    populateAdminSkills(skills); }
-    if (ach)    { renderAchievements(ach); populateAdminAchievements(ach); }
-
-  } catch(e) {
-    console.error('Boot error', e);
-    toast('⚠ Could not load data: ' + e.message, true);
-  }
-
-  // Hide loader
-  setTimeout(() => {
-    const l = $('loader');
-    if (l) { l.style.opacity='0'; l.style.transition='opacity .6s'; setTimeout(()=>l.style.display='none',700); }
-  }, 1500);
-}
-
-// ═══════════════════════════════════════════════════════════════
-// CURSOR
-// ═══════════════════════════════════════════════════════════════
-const cur  = $('cur');
-const cur2 = $('cur2');
-let mx=0,my=0,fx=0,fy=0;
-document.addEventListener('mousemove', e => {
-  mx=e.clientX; my=e.clientY;
-  if (cur) cur.style.transform=`translate(${mx-5}px,${my-5}px)`;
-});
-(function animCur(){
-  fx+=(mx-fx)*.13; fy+=(my-fy)*.13;
-  if (cur2) cur2.style.transform=`translate(${fx-19}px,${fy-19}px)`;
-  requestAnimationFrame(animCur);
-})();
-document.querySelectorAll('a,button,.proj-card,.edu-card,.exp-card,.cert-card,.ach-card,.skill-item,.contact-item').forEach(el=>{
-  el.addEventListener('mouseenter',()=>cur&&cur.classList.add('big'));
-  el.addEventListener('mouseleave',()=>cur&&cur.classList.remove('big'));
-});
-
-// ═══════════════════════════════════════════════════════════════
-// NAV
-// ═══════════════════════════════════════════════════════════════
-window.addEventListener('scroll',()=>{
-  document.getElementById('nav').classList.toggle('solid', window.scrollY>40);
-});
-function toggleMobile(){
-  document.getElementById('hamburger').classList.toggle('open');
-  document.getElementById('mobileMenu').classList.toggle('open');
-}
-function closeMobileMenu(){
-  document.getElementById('hamburger').classList.remove('open');
-  document.getElementById('mobileMenu').classList.remove('open');
-}
-
-// ═══════════════════════════════════════════════════════════════
-// SCROLL REVEAL
-// ═══════════════════════════════════════════════════════════════
-const revealObs = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); revealObs.unobserve(e.target); }});
-},{threshold:.1});
-document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
-
-// ═══════════════════════════════════════════════════════════════
-// MODAL
-// ═══════════════════════════════════════════════════════════════
-function openModal(id)  { $(id).classList.add('open'); }
-function closeModal(id) { $(id).classList.remove('open'); }
-document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{ if(e.target===o) o.classList.remove('open'); }));
-
-// ═══════════════════════════════════════════════════════════════
-// ADMIN AUTH
-// ═══════════════════════════════════════════════════════════════
-function checkPass(){
-  const v = $('passInput').value;
-  const err = $('passErr');
-  if(v === PASS){ closeModal('passModal'); openAdmin(); }
-  else { err.style.display='block'; $('passInput').value=''; }
-}
-function openAdmin()  { PORT.style.display='none'; ADMIN.classList.add('open'); window.scrollTo(0,0); }
-function exitAdmin()  { ADMIN.classList.remove('open'); PORT.style.display=''; window.scrollTo(0,0); }
-
-// ═══════════════════════════════════════════════════════════════
-// ADMIN TABS
-// ═══════════════════════════════════════════════════════════════
-function switchTab(id, btn){
-  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.atab').forEach(b=>b.classList.remove('active'));
-  $(id).classList.add('active');
-  btn.classList.add('active');
-}
-
-// ═══════════════════════════════════════════════════════════════
-// RESUME DOWNLOAD
-// ═══════════════════════════════════════════════════════════════
-async function downloadResume(){
-  // always fetch latest from DB
-  const h = await dbGet('hero');
-  const url = (h && h.resumeUrl) ? h.resumeUrl.trim() : '';
-  if(!url){ alert('Resume URL not set.\nGo to Admin Panel → Hero tab → paste your Google Drive shareable link in "Resume Download URL".'); return false; }
-  window.open(url,'_blank');
-  return false;
-}
-
-// ═══════════════════════════════════════════════════════════════
-// REMOVE ITEM
-// ═══════════════════════════════════════════════════════════════
-function removeItem(btn){ btn.closest('.list-item-box').remove(); }
-
-// ═══════════════════════════════════════════════════════════════
-// ── SAVE FUNCTIONS — save to Supabase then re-render ──────────
-// ═══════════════════════════════════════════════════════════════
-
-async function saveHero(){
-  const h = {
-    badge:      val('a-badge'),
-    firstName:  val('a-fname'),
-    lastName:   val('a-lname'),
-    role:       val('a-role'),
-    desc:       val('a-desc'),
-    stat1Num:   val('a-s1n'),   stat1Label: val('a-s1l'),
-    stat2Num:   val('a-s2n'),   stat2Label: val('a-s2l'),
-    stat3Num:   val('a-s3n'),   stat3Label: val('a-s3l'),
-    photoUrl:   val('a-photo'),
-    linkedinUrl:val('a-linkedin'),
-    resumeUrl:  val('a-resume'),
-    githubUrl:  val('a-github')
-  };
-  const ok = await dbSet('hero', h);
-  if(ok){ renderHero(h); toast('✓ Hero section saved to database'); }
-}
-
-async function saveAbout(){
-  const langs = val('a-langs').split(',').map(l=>l.trim()).filter(Boolean);
-  const a = {
-    fullName: val('a-fullname'), dob:   val('a-dob'),
-    gender:   val('a-gender'),   location: val('a-loc'),
-    phone:    val('a-aphone'),   languages: langs,
-    p1: val('a-p1'), p2: val('a-p2'), p3: val('a-p3')
-  };
-  const ok = await dbSet('about', a);
-  if(ok){ renderAbout(a); toast('✓ About section saved to database'); }
-}
-
-async function saveExp(){
-  // upsert existing row (first row) or insert
-  const skills = val('a-eskills').split(',').map(s=>s.trim()).filter(Boolean);
-  const row = {
-    company:     val('a-company'),
-    role:        val('a-erole'),
-    duration:    val('a-edur'),
-    description: val('a-edesc'),
-    skills,
-    sort_order: 1,
-    updated_at: new Date().toISOString()
-  };
-  const { data: existing } = await sb.from('portfolio_experience').select('id').order('sort_order').limit(1);
-  let error;
-  if(existing && existing.length){
-    ({ error } = await sb.from('portfolio_experience').update(row).eq('id', existing[0].id));
-  } else {
-    ({ error } = await sb.from('portfolio_experience').insert(row));
-  }
-  if(error){ toast('⚠ Save failed: '+error.message, true); return; }
-  renderExperience([row]);
-  toast('✓ Experience saved to database');
-}
-
-async function saveEducation(){
-  const items = document.querySelectorAll('#a-edu-list .list-item-box');
-  // delete all then re-insert
-  await sb.from('portfolio_education').delete().neq('id','00000000-0000-0000-0000-000000000000');
-  const rows = Array.from(items).map((item, i) => ({
-    institution: item.querySelector('[data-e="inst"]')?.value||'',
-    degree:      item.querySelector('[data-e="degree"]')?.value||'',
-    score:       item.querySelector('[data-e="score"]')?.value||'',
-    year:        item.querySelector('[data-e="year"]')?.value||'',
-    icon:        item.querySelector('[data-e="icon"]')?.value||'🎓',
-    sort_order:  i+1
-  }));
-  const { error } = await sb.from('portfolio_education').insert(rows);
-  if(error){ toast('⚠ Save failed: '+error.message, true); return; }
-  renderEducation(rows);
-  toast('✓ Education saved to database');
-}
-
-async function saveProjects(){
-  const items = document.querySelectorAll('#a-proj-list .list-item-box');
-  await sb.from('portfolio_projects').delete().neq('id','00000000-0000-0000-0000-000000000000');
-  const rows = Array.from(items).map((item, i) => ({
-    title:       item.querySelector('[data-p="title"]')?.value||'',
-    icon:        item.querySelector('[data-p="icon"]')?.value||'💡',
-    description: item.querySelector('[data-p="desc"]')?.value||'',
-    link:        item.querySelector('[data-p="link"]')?.value||'',
-    date_range:  item.querySelector('[data-p="date"]')?.value||'',
-    team:        item.querySelector('[data-p="team"]')?.value||'',
-    skills:      (item.querySelector('[data-p="skills"]')?.value||'').split(',').map(s=>s.trim()).filter(Boolean),
-    sort_order:  i+1
-  }));
-  const { error } = await sb.from('portfolio_projects').insert(rows);
-  if(error){ toast('⚠ Save failed: '+error.message, true); return; }
-  renderProjects(rows);
-  toast('✓ Projects saved to database');
-}
-
-async function saveCerts(){
-  const items = document.querySelectorAll('#a-cert-list .list-item-box');
-  await sb.from('portfolio_certifications').delete().neq('id','00000000-0000-0000-0000-000000000000');
-  const rows = Array.from(items).map((item, i) => ({
-    name:        item.querySelector('[data-c="name"]')?.value||'',
-    icon:        item.querySelector('[data-c="icon"]')?.value||'🏆',
-    issuer:      item.querySelector('[data-c="issuer"]')?.value||'',
-    date_issued: item.querySelector('[data-c="date"]')?.value||'',
-    link:        item.querySelector('[data-c="link"]')?.value||'',
-    sort_order:  i+1
-  }));
-  const { error } = await sb.from('portfolio_certifications').insert(rows);
-  if(error){ toast('⚠ Save failed: '+error.message, true); return; }
-  renderCerts(rows);
-  toast('✓ Certifications saved to database');
-}
-
-async function saveSkills(){
-  const items = document.querySelectorAll('#a-skills-list .list-item-box');
-  await sb.from('portfolio_skills').delete().neq('id','00000000-0000-0000-0000-000000000000');
-  const rows = Array.from(items).map((item, i) => ({
-    group_title: item.querySelector('[data-sg="title"]')?.value||'',
-    skill_lines: (item.querySelector('[data-sg="skills"]')?.value||'').split('\n').map(l=>l.trim()).filter(Boolean),
-    sort_order:  i+1
-  }));
-  const { error } = await sb.from('portfolio_skills').insert(rows);
-  if(error){ toast('⚠ Save failed: '+error.message, true); return; }
-  renderSkills(rows);
-  toast('✓ Skills saved to database');
-}
-
-async function saveAchievements(){
-  const items = document.querySelectorAll('#a-ach-list .list-item-box');
-  await sb.from('portfolio_achievements').delete().neq('id','00000000-0000-0000-0000-000000000000');
-  const rows = Array.from(items).map((item, i) => ({
-    icon:        item.querySelector('[data-a="icon"]')?.value||'🏅',
-    title:       item.querySelector('[data-a="title"]')?.value||'',
-    description: item.querySelector('[data-a="desc"]')?.value||'',
-    sort_order:  i+1
-  }));
-  const { error } = await sb.from('portfolio_achievements').insert(rows);
-  if(error){ toast('⚠ Save failed: '+error.message, true); return; }
-  renderAchievements(rows);
-  toast('✓ Achievements saved to database');
-}
-
-async function saveContact(){
-  const c = {
-    phone:       val('a-cphone'),
-    email1:      val('a-email1'),
-    email2:      val('a-email2'),
-    linkedinUrl: val('a-cli'),
-    intro:       val('a-cintro')
-  };
-  const ok = await dbSet('contact', c);
-  if(ok){ renderContact(c); toast('✓ Contact info saved to database'); }
-}
-
-async function saveFooter(){
-  const f = { name: val('a-fbrand'), tagline: val('a-ftag') };
-  const ok = await dbSet('footer', f);
-  if(ok){ renderFooter(f); toast('✓ Footer saved to database'); }
-}
-
-async function changePass(){
-  const cur  = $('a-pcur').value;
-  const nw   = $('a-pnew').value;
-  const cf   = $('a-pconf').value;
-  const msg  = $('a-pmsg');
-  msg.style.display='block';
-  if(cur !== PASS){ msg.style.color='var(--rose)'; msg.textContent='⚠ Current password is incorrect.'; return; }
-  if(nw.length < 6){ msg.style.color='var(--rose)'; msg.textContent='⚠ Password must be at least 6 characters.'; return; }
-  if(nw !== cf){ msg.style.color='var(--rose)'; msg.textContent='⚠ Passwords do not match.'; return; }
-  const ok = await dbSet('admin', { password: nw });
-  if(ok){
-    PASS = nw;
-    msg.style.color='var(--teal)'; msg.textContent='✓ Password changed and saved!';
-    $('a-pcur').value=''; $('a-pnew').value=''; $('a-pconf').value='';
-    setTimeout(()=>msg.style.display='none',3000);
-  }
-}
-
-// ═══════════════════════════════════════════════════════════════
-// ADD ITEM HELPERS
-// ═══════════════════════════════════════════════════════════════
-function addProject(){
-  $('a-proj-list').insertAdjacentHTML('beforeend',buildListItemBox(`
-    <div class="a-row">
-      <div class="field" style="flex:2"><label>Title</label><input data-p="title" placeholder="Project title"></div>
-      <div class="field" style="flex:0 0 80px"><label>Icon</label><input data-p="icon" placeholder="💡"></div>
-    </div>
-    <div class="field"><label>Description</label><textarea data-p="desc" placeholder="Project description..."></textarea></div>
-    <div class="a-row">
-      <div class="field"><label>URL</label><input data-p="link" placeholder="https://..."></div>
-      <div class="field"><label>Date</label><input data-p="date" placeholder="Jan 2025 – Mar 2025"></div>
-      <div class="field" style="flex:0 0 140px"><label>Team</label><input data-p="team" placeholder="Solo"></div>
-    </div>
-    <div class="field"><label>Skills</label><input data-p="skills" placeholder="HTML,CSS,JavaScript"></div>`));
-}
-function addCert(){
-  $('a-cert-list').insertAdjacentHTML('beforeend',buildListItemBox(`
-    <div class="a-row">
-      <div class="field" style="flex:3"><label>Name</label><input data-c="name" placeholder="Certificate name"></div>
-      <div class="field" style="flex:0 0 70px"><label>Icon</label><input data-c="icon" placeholder="🏆"></div>
-    </div>
-    <div class="a-row">
-      <div class="field"><label>Issuer</label><input data-c="issuer" placeholder="Organization"></div>
-      <div class="field" style="flex:0 0 140px"><label>Date</label><input data-c="date" placeholder="Jan 2025"></div>
-      <div class="field"><label>Link</label><input data-c="link" placeholder="https://..."></div>
-    </div>`));
-}
-function addEducation(){
-  $('a-edu-list').insertAdjacentHTML('beforeend',buildListItemBox(`
-    <div class="a-row">
-      <div class="field" style="flex:3"><label>Institution</label><input data-e="inst" placeholder="Institution name"></div>
-      <div class="field" style="flex:0 0 70px"><label>Icon</label><input data-e="icon" placeholder="🎓"></div>
-    </div>
-    <div class="a-row">
-      <div class="field"><label>Degree</label><input data-e="degree" placeholder="e.g. B.E. Mechanical"></div>
-      <div class="field" style="flex:0 0 140px"><label>Score</label><input data-e="score" placeholder="e.g. 7.5/10"></div>
-      <div class="field" style="flex:0 0 120px"><label>Year</label><input data-e="year" placeholder="2020–2024"></div>
-    </div>`));
-}
-function addSkillGroup(){
-  $('a-skills-list').insertAdjacentHTML('beforeend',buildListItemBox(`
-    <div class="field"><label>Group Title</label><input data-sg="title" placeholder="e.g. New Skills"></div>
-    <div class="field"><label>Skills (one per line: emoji Name)</label><textarea data-sg="skills" placeholder="⭐ Skill Name"></textarea></div>`));
-}
-function addAchievement(){
-  $('a-ach-list').insertAdjacentHTML('beforeend',buildListItemBox(`
-    <div class="a-row">
-      <div class="field" style="flex:0 0 80px"><label>Icon</label><input data-a="icon" placeholder="🏅"></div>
-      <div class="field"><label>Title</label><input data-a="title" placeholder="Achievement title"></div>
-    </div>
-    <div class="field"><label>Description</label><textarea data-a="desc" placeholder="Describe this achievement..."></textarea></div>`));
-}
-
-// ═══════════════════════════════════════════════════════════════
-// YEAR + BOOT
-// ═══════════════════════════════════════════════════════════════
-$('p-year').textContent = new Date().getFullYear();
-bootPortfolio();
-
-// ═══════════════════════════════════════════════════════════════
-// ADVANCED FEATURE 1 — Scroll Progress Bar
-// ═══════════════════════════════════════════════════════════════
-(function() {
-  const bar = $('scroll-progress');
-  if (!bar) return;
-  window.addEventListener('scroll', () => {
-    const total = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = total > 0 ? (window.scrollY / total) * 100 : 0;
-    bar.style.width = pct + '%';
-  }, { passive: true });
-})();
-
-// ═══════════════════════════════════════════════════════════════
-// ADVANCED FEATURE 2 — Back to Top Button
-// ═══════════════════════════════════════════════════════════════
-(function() {
-  const btn = $('btt');
-  if (!btn) return;
-  window.addEventListener('scroll', () => {
-    btn.classList.toggle('show', window.scrollY > 500);
-  }, { passive: true });
-})();
-
-// ═══════════════════════════════════════════════════════════════
-// ADVANCED FEATURE 3 — Typewriter on Hero Badge
-// ═══════════════════════════════════════════════════════════════
-(function() {
-  function startTyped(el, words) {
-    if (!el) return;
-    const cursor = document.createElement('span');
-    cursor.className = 'typed-cursor';
-    el.after(cursor);
-    let wi = 0, ci = 0, deleting = false;
-    function tick() {
-      const word = words[wi % words.length];
-      if (!deleting) {
-        el.textContent = word.slice(0, ++ci);
-        if (ci === word.length) { deleting = true; setTimeout(tick, 1800); return; }
-        setTimeout(tick, 95);
-      } else {
-        el.textContent = word.slice(0, --ci);
-        if (ci === 0) { deleting = false; wi++; setTimeout(tick, 350); return; }
-        setTimeout(tick, 52);
-      }
-    }
-    // Wait for boot to populate then start
-    setTimeout(tick, 2400);
-  }
-  startTyped($('p-badge'), [
-    'Available for Opportunities',
-    'Mechanical Engineer',
-    'EV Manufacturing Intern',
-    'Open to Collaborate'
-  ]);
-})();
-
-// ═══════════════════════════════════════════════════════════════
-// ADVANCED FEATURE 4 — Skill Bar Animations on Scroll
-// ═══════════════════════════════════════════════════════════════
-(function() {
-  const levels = { 0: 90, 1: 85, 2: 80, 3: 75, 4: 88 };
-  function attachBars() {
-    document.querySelectorAll('.skill-item').forEach((el, i) => {
-      if (el.querySelector('.skill-bar')) return;
-      const bar = document.createElement('div');
-      bar.className = 'skill-bar';
-      el.appendChild(bar);
-    });
-    const barObs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        const bars = e.target.querySelectorAll('.skill-bar');
-        bars.forEach((b, i) => {
-          setTimeout(() => { b.style.width = (levels[i] || 78) + '%'; }, i * 120);
-        });
-        barObs.unobserve(e.target);
-      });
-    }, { threshold: 0.3 });
-    const sg = document.querySelector('.skills-grid');
-    if (sg) barObs.observe(sg);
-  }
-  // Run after boot renders skills
-  setTimeout(attachBars, 2800);
-})();
-
-// ═══════════════════════════════════════════════════════════════
-// ADVANCED FEATURE 5 — Active Nav Highlight on Scroll
-// ═══════════════════════════════════════════════════════════════
-(function() {
-  const sections = ['hero','about','education','experience','projects','skills','certifications','achievements','contact'];
-  const links = document.querySelectorAll('.nav-links a, .mobile-menu a');
-  function onScroll() {
-    let current = 'hero';
-    for (const id of sections) {
-      const el = document.getElementById(id);
-      if (el && window.scrollY >= el.offsetTop - 120) current = id;
-    }
-    links.forEach(a => {
-      const href = a.getAttribute('href') || '';
-      a.classList.toggle('nav-active', href === '#' + current);
-    });
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-})();
-
-// ═══════════════════════════════════════════════════════════════
-// ADVANCED FEATURE 6 — Section Number Watermarks
-// ═══════════════════════════════════════════════════════════════
-(function() {
-  const nums = { about:'01', education:'02', experience:'03', projects:'04', skills:'05', certifications:'06', achievements:'07', contact:'08' };
-  Object.entries(nums).forEach(([id, num]) => {
-    const sec = document.getElementById(id);
-    if (!sec) return;
-    if (getComputedStyle(sec).position === 'static') sec.style.position = 'relative';
-    const d = document.createElement('div');
-    d.className = 'sec-num';
-    d.textContent = num;
-    sec.appendChild(d);
-  });
-})();
-</script>
-</body>
-</html>
+      sb.from('portfolio_ski
