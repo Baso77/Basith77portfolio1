@@ -1813,10 +1813,13 @@ function sendContactForm(e){
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
   emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+    name: name,
+    email: email,
+    title: 'New message from ' + name,
+    message: message,
     from_name: name,
     from_email: email,
-    message: message,
-    to_email: 'mohamedbasith.sknscoe.mech77@gmail.com'
+    to_email: 'mohamedbasithmohamedbasith804@gmail.com'
   }).then(() => {
     status.className = 'cf-status ok';
     status.textContent = 'Message sent — thanks for reaching out! I\'ll reply soon.';
