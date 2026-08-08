@@ -343,8 +343,11 @@ footer{background:rgba(10,8,6,1);padding:2rem 5%;border-top:1px solid rgba(255,2
   .hero-desc,.hero-btns,.hero-stats{margin-left:auto;margin-right:auto}
   .hero-btns,.hero-stats{justify-content:center}
   .hero-visual{order:-1}
+  .hero-img-wrap{width:220px}
   .hero-img-bg{width:220px;height:270px}
-  .ht1,.ht2{display:none}
+  .ht1,.ht2{font-size:.72rem;padding:.55rem .8rem;max-width:150px;overflow:hidden}
+  .ht1 .hero-tag-icon,.ht2 .hero-tag-icon{width:26px;height:26px;font-size:.85rem;flex-shrink:0}
+  #p-tag1-value,#p-tag2-value,#p-tag1-label,#p-tag2-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .about-grid{flex-direction:column;gap:2.5rem}
   .hero-eyebrow{justify-content:center}
   .section-sub{max-width:100%}
@@ -368,6 +371,10 @@ footer{background:rgba(10,8,6,1);padding:2rem 5%;border-top:1px solid rgba(255,2
   .hero-btns a{width:100%;justify-content:center}
   .hero-stats{gap:1.2rem;flex-wrap:wrap}
   .hero-img-bg{width:170px;height:210px}
+  .hero-img-wrap{width:170px}
+  .ht1{left:-14px;bottom:-8px}
+  .ht2{right:-10px;top:14px}
+  .ht1,.ht2{font-size:.66rem;padding:.45rem .65rem;max-width:128px}
   .section-title{font-size:2rem!important}
   .contact-wrapper{gap:2.5rem}
   .btn-gold,.btn-outline{width:100%;justify-content:center;padding:.85rem 1.4rem}
@@ -536,11 +543,11 @@ footer{background:rgba(10,8,6,1);padding:2rem 5%;border-top:1px solid rgba(255,2
         </div>
         <div class="hero-frame"></div>
         <div class="hero-tag ht1">
-          <div class="hero-tag-icon" style="background:#fff8ed">⚡</div>
+          <div class="hero-tag-icon" style="background:#fff8ed" id="p-tag1-icon">⚡</div>
           <div><div style="font-size:.7rem;color:var(--ink3)" id="p-tag1-label">Current Role</div><div style="font-size:.82rem;font-weight:600" id="p-tag1-value">EV Manufacturing</div></div>
         </div>
         <div class="hero-tag ht2">
-          <div class="hero-tag-icon" style="background:#f0faf8">🎓</div>
+          <div class="hero-tag-icon" style="background:#f0faf8" id="p-tag2-icon">🎓</div>
           <div><div style="font-size:.7rem;color:var(--ink3)" id="p-tag2-label">Graduating</div><div style="font-size:.82rem;font-weight:600" id="p-tag2-value">2026</div></div>
         </div>
       </div>
@@ -931,10 +938,12 @@ footer{background:rgba(10,8,6,1);padding:2rem 5%;border-top:1px solid rgba(255,2
         </div>
         <div class="field"><label>GitHub URL (leave blank to hide)</label><input id="a-github" placeholder="https://github.com/..."></div>
         <div class="a-row">
+          <div class="field" style="flex:0 0 90px;min-width:80px"><label>Tag 1 Emoji</label><input id="a-tag1icon" value="⚡" maxlength="4"></div>
           <div class="field"><label>Photo Tag 1 — Label</label><input id="a-tag1label" value="Current Role"></div>
           <div class="field"><label>Photo Tag 1 — Value</label><input id="a-tag1value" value="EV Manufacturing"></div>
         </div>
         <div class="a-row">
+          <div class="field" style="flex:0 0 90px;min-width:80px"><label>Tag 2 Emoji</label><input id="a-tag2icon" value="🎓" maxlength="4"></div>
           <div class="field"><label>Photo Tag 2 — Label</label><input id="a-tag2label" value="Graduating"></div>
           <div class="field"><label>Photo Tag 2 — Value</label><input id="a-tag2value" value="2026"></div>
         </div>
@@ -1325,6 +1334,8 @@ function renderHero(h) {
   txt('p-tag1-value', h.tag1Value !== undefined ? h.tag1Value : 'EV Manufacturing');
   txt('p-tag2-label', h.tag2Label !== undefined ? h.tag2Label : 'Graduating');
   txt('p-tag2-value', h.tag2Value !== undefined ? h.tag2Value : '2026');
+  txt('p-tag1-icon',  h.tag1Icon !== undefined ? h.tag1Icon : '⚡');
+  txt('p-tag2-icon',  h.tag2Icon !== undefined ? h.tag2Icon : '🎓');
   // photo
   const avt = $('p-avatar');
   if (avt) {
@@ -1498,6 +1509,8 @@ function populateAdminHero(h) {
   setVal('a-tag1value', h.tag1Value !== undefined ? h.tag1Value : 'EV Manufacturing');
   setVal('a-tag2label', h.tag2Label !== undefined ? h.tag2Label : 'Graduating');
   setVal('a-tag2value', h.tag2Value !== undefined ? h.tag2Value : '2026');
+  setVal('a-tag1icon', h.tag1Icon !== undefined ? h.tag1Icon : '⚡');
+  setVal('a-tag2icon', h.tag2Icon !== undefined ? h.tag2Icon : '🎓');
   setVal('a-photo',   h.photoUrl||'');
   setVal('a-linkedin',h.linkedinUrl||'');
   setVal('a-resume',  h.resumeUrl||'');
@@ -1834,8 +1847,8 @@ async function saveHero(){
     stat1Num:   val('a-s1n'),   stat1Label: val('a-s1l'),
     stat2Num:   val('a-s2n'),   stat2Label: val('a-s2l'),
     stat3Num:   val('a-s3n'),   stat3Label: val('a-s3l'),
-    tag1Label:  val('a-tag1label'), tag1Value: val('a-tag1value'),
-    tag2Label:  val('a-tag2label'), tag2Value: val('a-tag2value'),
+    tag1Label:  val('a-tag1label'), tag1Value: val('a-tag1value'), tag1Icon: val('a-tag1icon'),
+    tag2Label:  val('a-tag2label'), tag2Value: val('a-tag2value'), tag2Icon: val('a-tag2icon'),
     photoUrl:   val('a-photo'),
     linkedinUrl:val('a-linkedin'),
     resumeUrl:  val('a-resume'),
