@@ -1619,4 +1619,549 @@ async function bootPortfolio() {
       sb.from('portfolio_experience').select('*').order('sort_order'),
       sb.from('portfolio_projects').select('*').order('sort_order'),
       sb.from('portfolio_certifications').select('*').order('sort_order'),
-      sb.from('portfolio_ski
+      sb.from('portfolio_skills').select('*').order('sort_order'),
+      sb.from('portfolio_achievements').select('*').order('sort_order')
+    ]);
+
+    if (edu)    { renderEducation(edu);    populateAdminEducation(edu); }
+    if (exp)    { renderExperience(exp);   populateAdminExperience(exp); }
+    if (proj)   { renderProjects(proj);    populateAdminProjects(proj); }
+    if (certs)  { renderCerts(certs);      populateAdminCerts(certs); }
+    if (skills) { renderSkills(skills);    populateAdminSkills(skills); }
+    if (ach)    { renderAchievements(ach); populateAdminAchievements(ach); }
+
+  } catch(e) {
+    console.error('Boot error', e);
+    toast('⚠ Could not load data: ' + e.message, true);
+  }
+
+  // Hide loader
+  setTimeout(() => {
+    const l = $('loader');
+    if (l) { l.style.opacity='0'; l.style.transition='opacity .6s'; setTimeout(()=>l.style.display='none',700); }
+  }, 1500);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CURSOR
+// ═══════════════════════════════════════════════════════════════
+const cur  = $('cur');
+const cur2 = $('cur2');
+let mx=0,my=0,fx=0,fy=0;
+document.addEventListener('mousemove', e => {
+  mx=e.clientX; my=e.clientY;
+  if (cur) cur.style.transform=`translate(${mx-5}px,${my-5}px)`;
+});
+(function animCur(){
+  fx+=(mx-fx)*.13; fy+=(my-fy)*.13;
+  if (cur2) cur2.style.transform=`translate(${fx-19}px,${fy-19}px)`;
+  requestAnimationFrame(animCur);
+})();
+document.querySelectorAll('a,button,.proj-card,.edu-card,.exp-card,.cert-card,.ach-card,.skill-item,.contact-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cur&&cur.classList.add('big'));
+  el.addEventListener('mouseleave',()=>cur&&cur.classList.remove('big'));
+});
+
+// ═══════════════════════════════════════════════════════════════
+// NAV
+// ═══════════════════════════════════════════════════════════════
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('solid', window.scrollY>40);
+});
+function toggleMobile(){
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.getElementById('navBackdrop').classList.toggle('open');
+}
+function closeMobileMenu(){
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('navBackdrop').classList.remove('open');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// DARK / LIGHT THEME (frontend-only, saved in localStorage)
+// ═══════════════════════════════════════════════════════════════
+function applyTheme(theme){
+  document.documentElement.setAttribute('data-theme', theme);
+  const isDark = theme === 'dark';
+  const icon1 = $('themeIcon'), icon2 = $('themeIconMobile'), label2 = $('themeLabelMobile');
+  if(icon1) icon1.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+  if(icon2) icon2.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+  if(label2) label2.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+}
+function toggleTheme(){
+  const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+  const next = current === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  try{ localStorage.setItem('mb-theme', next); }catch(e){}
+}
+(function initTheme(){
+  let saved = null;
+  try{ saved = localStorage.getItem('mb-theme'); }catch(e){}
+  if(!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) saved = 'dark';
+  applyTheme(saved === 'dark' ? 'dark' : 'light');
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// SCROLL REVEAL
+// ═══════════════════════════════════════════════════════════════
+const revealObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); revealObs.unobserve(e.target); }});
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+
+// ═══════════════════════════════════════════════════════════════
+// MODAL
+// ═══════════════════════════════════════════════════════════════
+function openModal(id)  { $(id).classList.add('open'); }
+function closeModal(id) { $(id).classList.remove('open'); }
+document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{ if(e.target===o) o.classList.remove('open'); }));
+
+// ═══════════════════════════════════════════════════════════════
+// ADMIN AUTH
+// ═══════════════════════════════════════════════════════════════
+function checkPass(){
+  const v = $('passInput').value;
+  const err = $('passErr');
+  if(v === PASS){ closeModal('passModal'); openAdmin(); }
+  else { err.style.display='block'; $('passInput').value=''; }
+}
+function openAdmin()  { PORT.style.display='none'; ADMIN.classList.add('open'); window.scrollTo(0,0); }
+function exitAdmin()  { ADMIN.classList.remove('open'); PORT.style.display=''; window.scrollTo(0,0); }
+
+// ═══════════════════════════════════════════════════════════════
+// ADMIN TABS
+// ═══════════════════════════════════════════════════════════════
+function switchTab(id, btn){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.atab').forEach(b=>b.classList.remove('active'));
+  $(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// RESUME DOWNLOAD
+// ═══════════════════════════════════════════════════════════════
+async function downloadResume(){
+  // always fetch latest from DB
+  const h = await dbGet('hero');
+  const url = (h && h.resumeUrl) ? h.resumeUrl.trim() : '';
+  if(!url){ alert('Resume URL not set.\nGo to Admin Panel → Hero tab → paste your Google Drive shareable link in "Resume Download URL".'); return false; }
+  window.open(url,'_blank');
+  return false;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// REMOVE ITEM
+// ═══════════════════════════════════════════════════════════════
+function removeItem(btn){ btn.closest('.list-item-box').remove(); }
+
+// ═══════════════════════════════════════════════════════════════
+// CONTACT FORM (EmailJS — no Supabase / database involved)
+// ═══════════════════════════════════════════════════════════════
+function sendContactForm(e){
+  e.preventDefault();
+  const btn = $('cfSubmitBtn');
+  const status = $('cfStatus');
+  status.className = 'cf-status';
+  status.textContent = '';
+
+  if (!EMAILJS_PUBLIC_KEY || !EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !window.emailjs) {
+    status.className = 'cf-status err';
+    status.textContent = 'Contact form isn\'t configured yet — set your EmailJS keys at the top of the script, or reach out via email/phone above.';
+    return false;
+  }
+
+  const name = val('cf-name'), email = val('cf-email'), message = val('cf-message');
+  if (!name || !email || !message) return false;
+
+  btn.disabled = true;
+  const original = btn.innerHTML;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+  emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+    from_name: name,
+    from_email: email,
+    message: message,
+    to_email: 'mohamedbasith.sknscoe.mech77@gmail.com'
+  }).then(() => {
+    status.className = 'cf-status ok';
+    status.textContent = 'Message sent — thanks for reaching out! I\'ll reply soon.';
+    $('contactForm').reset();
+  }).catch(err => {
+    status.className = 'cf-status err';
+    status.textContent = 'Something went wrong sending that. Please try the email link above instead.';
+    console.error('EmailJS error', err);
+  }).finally(() => {
+    btn.disabled = false;
+    btn.innerHTML = original;
+  });
+
+  return false;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ── SAVE FUNCTIONS — save to Supabase then re-render ──────────
+// ═══════════════════════════════════════════════════════════════
+
+async function saveHero(){
+  const h = {
+    badge:      val('a-badge'),
+    firstName:  val('a-fname'),
+    lastName:   val('a-lname'),
+    role:       val('a-role'),
+    desc:       val('a-desc'),
+    stat1Num:   val('a-s1n'),   stat1Label: val('a-s1l'),
+    stat2Num:   val('a-s2n'),   stat2Label: val('a-s2l'),
+    stat3Num:   val('a-s3n'),   stat3Label: val('a-s3l'),
+    photoUrl:   val('a-photo'),
+    linkedinUrl:val('a-linkedin'),
+    resumeUrl:  val('a-resume'),
+    githubUrl:  val('a-github')
+  };
+  const ok = await dbSet('hero', h);
+  if(ok){ renderHero(h); toast('✓ Hero section saved to database'); }
+}
+
+async function saveAbout(){
+  const langs = val('a-langs').split(',').map(l=>l.trim()).filter(Boolean);
+  const a = {
+    fullName: val('a-fullname'), dob:   val('a-dob'),
+    gender:   val('a-gender'),   location: val('a-loc'),
+    phone:    val('a-aphone'),   languages: langs,
+    p1: val('a-p1'), p2: val('a-p2'), p3: val('a-p3')
+  };
+  const ok = await dbSet('about', a);
+  if(ok){ renderAbout(a); toast('✓ About section saved to database'); }
+}
+
+async function saveExp(){
+  // upsert existing row (first row) or insert
+  const skills = val('a-eskills').split(',').map(s=>s.trim()).filter(Boolean);
+  const row = {
+    company:     val('a-company'),
+    role:        val('a-erole'),
+    duration:    val('a-edur'),
+    description: val('a-edesc'),
+    skills,
+    sort_order: 1,
+    updated_at: new Date().toISOString()
+  };
+  const { data: existing } = await sb.from('portfolio_experience').select('id').order('sort_order').limit(1);
+  let error;
+  if(existing && existing.length){
+    ({ error } = await sb.from('portfolio_experience').update(row).eq('id', existing[0].id));
+  } else {
+    ({ error } = await sb.from('portfolio_experience').insert(row));
+  }
+  if(error){ toast('⚠ Save failed: '+error.message, true); return; }
+  renderExperience([row]);
+  toast('✓ Experience saved to database');
+}
+
+async function saveEducation(){
+  const items = document.querySelectorAll('#a-edu-list .list-item-box');
+  // delete all then re-insert
+  await sb.from('portfolio_education').delete().neq('id','00000000-0000-0000-0000-000000000000');
+  const rows = Array.from(items).map((item, i) => ({
+    institution: item.querySelector('[data-e="inst"]')?.value||'',
+    degree:      item.querySelector('[data-e="degree"]')?.value||'',
+    score:       item.querySelector('[data-e="score"]')?.value||'',
+    year:        item.querySelector('[data-e="year"]')?.value||'',
+    icon:        item.querySelector('[data-e="icon"]')?.value||'🎓',
+    sort_order:  i+1
+  }));
+  const { error } = await sb.from('portfolio_education').insert(rows);
+  if(error){ toast('⚠ Save failed: '+error.message, true); return; }
+  renderEducation(rows);
+  toast('✓ Education saved to database');
+}
+
+async function saveProjects(){
+  const items = document.querySelectorAll('#a-proj-list .list-item-box');
+  await sb.from('portfolio_projects').delete().neq('id','00000000-0000-0000-0000-000000000000');
+  const rows = Array.from(items).map((item, i) => ({
+    title:       item.querySelector('[data-p="title"]')?.value||'',
+    icon:        item.querySelector('[data-p="icon"]')?.value||'💡',
+    description: item.querySelector('[data-p="desc"]')?.value||'',
+    link:        item.querySelector('[data-p="link"]')?.value||'',
+    date_range:  item.querySelector('[data-p="date"]')?.value||'',
+    team:        item.querySelector('[data-p="team"]')?.value||'',
+    skills:      (item.querySelector('[data-p="skills"]')?.value||'').split(',').map(s=>s.trim()).filter(Boolean),
+    sort_order:  i+1
+  }));
+  const { error } = await sb.from('portfolio_projects').insert(rows);
+  if(error){ toast('⚠ Save failed: '+error.message, true); return; }
+  renderProjects(rows);
+  toast('✓ Projects saved to database');
+}
+
+async function saveCerts(){
+  const items = document.querySelectorAll('#a-cert-list .list-item-box');
+  await sb.from('portfolio_certifications').delete().neq('id','00000000-0000-0000-0000-000000000000');
+  const rows = Array.from(items).map((item, i) => ({
+    name:        item.querySelector('[data-c="name"]')?.value||'',
+    icon:        item.querySelector('[data-c="icon"]')?.value||'🏆',
+    issuer:      item.querySelector('[data-c="issuer"]')?.value||'',
+    date_issued: item.querySelector('[data-c="date"]')?.value||'',
+    link:        item.querySelector('[data-c="link"]')?.value||'',
+    sort_order:  i+1
+  }));
+  const { error } = await sb.from('portfolio_certifications').insert(rows);
+  if(error){ toast('⚠ Save failed: '+error.message, true); return; }
+  renderCerts(rows);
+  toast('✓ Certifications saved to database');
+}
+
+async function saveSkills(){
+  const items = document.querySelectorAll('#a-skills-list .list-item-box');
+  await sb.from('portfolio_skills').delete().neq('id','00000000-0000-0000-0000-000000000000');
+  const rows = Array.from(items).map((item, i) => ({
+    group_title: item.querySelector('[data-sg="title"]')?.value||'',
+    skill_lines: (item.querySelector('[data-sg="skills"]')?.value||'').split('\n').map(l=>l.trim()).filter(Boolean),
+    sort_order:  i+1
+  }));
+  const { error } = await sb.from('portfolio_skills').insert(rows);
+  if(error){ toast('⚠ Save failed: '+error.message, true); return; }
+  renderSkills(rows);
+  toast('✓ Skills saved to database');
+}
+
+async function saveAchievements(){
+  const items = document.querySelectorAll('#a-ach-list .list-item-box');
+  await sb.from('portfolio_achievements').delete().neq('id','00000000-0000-0000-0000-000000000000');
+  const rows = Array.from(items).map((item, i) => ({
+    icon:        item.querySelector('[data-a="icon"]')?.value||'🏅',
+    title:       item.querySelector('[data-a="title"]')?.value||'',
+    description: item.querySelector('[data-a="desc"]')?.value||'',
+    sort_order:  i+1
+  }));
+  const { error } = await sb.from('portfolio_achievements').insert(rows);
+  if(error){ toast('⚠ Save failed: '+error.message, true); return; }
+  renderAchievements(rows);
+  toast('✓ Achievements saved to database');
+}
+
+async function saveContact(){
+  const c = {
+    phone:       val('a-cphone'),
+    email1:      val('a-email1'),
+    email2:      val('a-email2'),
+    linkedinUrl: val('a-cli'),
+    intro:       val('a-cintro')
+  };
+  const ok = await dbSet('contact', c);
+  if(ok){ renderContact(c); toast('✓ Contact info saved to database'); }
+}
+
+async function saveFooter(){
+  const f = { name: val('a-fbrand'), tagline: val('a-ftag') };
+  const ok = await dbSet('footer', f);
+  if(ok){ renderFooter(f); toast('✓ Footer saved to database'); }
+}
+
+async function changePass(){
+  const cur  = $('a-pcur').value;
+  const nw   = $('a-pnew').value;
+  const cf   = $('a-pconf').value;
+  const msg  = $('a-pmsg');
+  msg.style.display='block';
+  if(cur !== PASS){ msg.style.color='var(--rose)'; msg.textContent='⚠ Current password is incorrect.'; return; }
+  if(nw.length < 6){ msg.style.color='var(--rose)'; msg.textContent='⚠ Password must be at least 6 characters.'; return; }
+  if(nw !== cf){ msg.style.color='var(--rose)'; msg.textContent='⚠ Passwords do not match.'; return; }
+  const ok = await dbSet('admin', { password: nw });
+  if(ok){
+    PASS = nw;
+    msg.style.color='var(--teal)'; msg.textContent='✓ Password changed and saved!';
+    $('a-pcur').value=''; $('a-pnew').value=''; $('a-pconf').value='';
+    setTimeout(()=>msg.style.display='none',3000);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ADD ITEM HELPERS
+// ═══════════════════════════════════════════════════════════════
+function addProject(){
+  $('a-proj-list').insertAdjacentHTML('beforeend',buildListItemBox(`
+    <div class="a-row">
+      <div class="field" style="flex:2"><label>Title</label><input data-p="title" placeholder="Project title"></div>
+      <div class="field" style="flex:0 0 80px"><label>Icon</label><input data-p="icon" placeholder="💡"></div>
+    </div>
+    <div class="field"><label>Description</label><textarea data-p="desc" placeholder="Project description..."></textarea></div>
+    <div class="a-row">
+      <div class="field"><label>URL</label><input data-p="link" placeholder="https://..."></div>
+      <div class="field"><label>Date</label><input data-p="date" placeholder="Jan 2025 – Mar 2025"></div>
+      <div class="field" style="flex:0 0 140px"><label>Team</label><input data-p="team" placeholder="Solo"></div>
+    </div>
+    <div class="field"><label>Skills</label><input data-p="skills" placeholder="HTML,CSS,JavaScript"></div>`));
+}
+function addCert(){
+  $('a-cert-list').insertAdjacentHTML('beforeend',buildListItemBox(`
+    <div class="a-row">
+      <div class="field" style="flex:3"><label>Name</label><input data-c="name" placeholder="Certificate name"></div>
+      <div class="field" style="flex:0 0 70px"><label>Icon</label><input data-c="icon" placeholder="🏆"></div>
+    </div>
+    <div class="a-row">
+      <div class="field"><label>Issuer</label><input data-c="issuer" placeholder="Organization"></div>
+      <div class="field" style="flex:0 0 140px"><label>Date</label><input data-c="date" placeholder="Jan 2025"></div>
+      <div class="field"><label>Link</label><input data-c="link" placeholder="https://..."></div>
+    </div>`));
+}
+function addEducation(){
+  $('a-edu-list').insertAdjacentHTML('beforeend',buildListItemBox(`
+    <div class="a-row">
+      <div class="field" style="flex:3"><label>Institution</label><input data-e="inst" placeholder="Institution name"></div>
+      <div class="field" style="flex:0 0 70px"><label>Icon</label><input data-e="icon" placeholder="🎓"></div>
+    </div>
+    <div class="a-row">
+      <div class="field"><label>Degree</label><input data-e="degree" placeholder="e.g. B.E. Mechanical"></div>
+      <div class="field" style="flex:0 0 140px"><label>Score</label><input data-e="score" placeholder="e.g. 7.5/10"></div>
+      <div class="field" style="flex:0 0 120px"><label>Year</label><input data-e="year" placeholder="2020–2024"></div>
+    </div>`));
+}
+function addSkillGroup(){
+  $('a-skills-list').insertAdjacentHTML('beforeend',buildListItemBox(`
+    <div class="field"><label>Group Title</label><input data-sg="title" placeholder="e.g. New Skills"></div>
+    <div class="field"><label>Skills (one per line: emoji Name)</label><textarea data-sg="skills" placeholder="⭐ Skill Name"></textarea></div>`));
+}
+function addAchievement(){
+  $('a-ach-list').insertAdjacentHTML('beforeend',buildListItemBox(`
+    <div class="a-row">
+      <div class="field" style="flex:0 0 80px"><label>Icon</label><input data-a="icon" placeholder="🏅"></div>
+      <div class="field"><label>Title</label><input data-a="title" placeholder="Achievement title"></div>
+    </div>
+    <div class="field"><label>Description</label><textarea data-a="desc" placeholder="Describe this achievement..."></textarea></div>`));
+}
+
+// ═══════════════════════════════════════════════════════════════
+// YEAR + BOOT
+// ═══════════════════════════════════════════════════════════════
+$('p-year').textContent = new Date().getFullYear();
+bootPortfolio();
+
+// ═══════════════════════════════════════════════════════════════
+// ADVANCED FEATURE 1 — Scroll Progress Bar
+// ═══════════════════════════════════════════════════════════════
+(function() {
+  const bar = $('scroll-progress');
+  if (!bar) return;
+  window.addEventListener('scroll', () => {
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = total > 0 ? (window.scrollY / total) * 100 : 0;
+    bar.style.width = pct + '%';
+  }, { passive: true });
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// ADVANCED FEATURE 2 — Back to Top Button
+// ═══════════════════════════════════════════════════════════════
+(function() {
+  const btn = $('btt');
+  if (!btn) return;
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('show', window.scrollY > 500);
+  }, { passive: true });
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// ADVANCED FEATURE 3 — Typewriter on Hero Badge
+// ═══════════════════════════════════════════════════════════════
+(function() {
+  function startTyped(el, words) {
+    if (!el) return;
+    const cursor = document.createElement('span');
+    cursor.className = 'typed-cursor';
+    el.after(cursor);
+    let wi = 0, ci = 0, deleting = false;
+    function tick() {
+      const word = words[wi % words.length];
+      if (!deleting) {
+        el.textContent = word.slice(0, ++ci);
+        if (ci === word.length) { deleting = true; setTimeout(tick, 1800); return; }
+        setTimeout(tick, 95);
+      } else {
+        el.textContent = word.slice(0, --ci);
+        if (ci === 0) { deleting = false; wi++; setTimeout(tick, 350); return; }
+        setTimeout(tick, 52);
+      }
+    }
+    // Wait for boot to populate then start
+    setTimeout(tick, 2400);
+  }
+  startTyped($('p-badge'), [
+    'Available for Opportunities',
+    'Mechanical Engineer',
+    'EV Manufacturing Intern',
+    'Open to Collaborate'
+  ]);
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// ADVANCED FEATURE 4 — Skill Bar Animations on Scroll
+// ═══════════════════════════════════════════════════════════════
+(function() {
+  const levels = { 0: 90, 1: 85, 2: 80, 3: 75, 4: 88 };
+  function attachBars() {
+    document.querySelectorAll('.skill-item').forEach((el, i) => {
+      if (el.querySelector('.skill-bar')) return;
+      const bar = document.createElement('div');
+      bar.className = 'skill-bar';
+      el.appendChild(bar);
+    });
+    const barObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const bars = e.target.querySelectorAll('.skill-bar');
+        bars.forEach((b, i) => {
+          setTimeout(() => { b.style.width = (levels[i] || 78) + '%'; }, i * 120);
+        });
+        barObs.unobserve(e.target);
+      });
+    }, { threshold: 0.3 });
+    const sg = document.querySelector('.skills-grid');
+    if (sg) barObs.observe(sg);
+  }
+  // Run after boot renders skills
+  setTimeout(attachBars, 2800);
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// ADVANCED FEATURE 5 — Active Nav Highlight on Scroll
+// ═══════════════════════════════════════════════════════════════
+(function() {
+  const sections = ['hero','about','education','experience','projects','skills','certifications','achievements','contact'];
+  const links = document.querySelectorAll('.nav-links a, .mobile-menu a');
+  function onScroll() {
+    let current = 'hero';
+    for (const id of sections) {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 120) current = id;
+    }
+    links.forEach(a => {
+      const href = a.getAttribute('href') || '';
+      a.classList.toggle('nav-active', href === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// ADVANCED FEATURE 6 — Section Number Watermarks
+// ═══════════════════════════════════════════════════════════════
+(function() {
+  const nums = { about:'01', education:'02', experience:'03', projects:'04', skills:'05', certifications:'06', achievements:'07', contact:'08' };
+  Object.entries(nums).forEach(([id, num]) => {
+    const sec = document.getElementById(id);
+    if (!sec) return;
+    if (getComputedStyle(sec).position === 'static') sec.style.position = 'relative';
+    const d = document.createElement('div');
+    d.className = 'sec-num';
+    d.textContent = num;
+    sec.appendChild(d);
+  });
+})();
+</script>
+</body>
+</html>
